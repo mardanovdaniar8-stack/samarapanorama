@@ -54,10 +54,12 @@
         .brand-logo {
             width: 44px;
             height: 44px;
-            border-radius: 5px;
-            background: #fff url('/static/logo.jpg') center/contain no-repeat;
+            border-radius: 7px;
+            background:
+                url('/static/logo.jpg') center/contain no-repeat #fff padding-box,
+                linear-gradient(135deg, #007aff, #5856d6 55%, #ff2d55) border-box;
+            border: 1.5px solid transparent;
             box-shadow: 0 6px 16px rgba(88, 86, 214, 0.25);
-            border: 1px solid #ececf0;
             display: block;
         }
 
@@ -389,13 +391,17 @@
         }
 
         .finish-trophy {
-            width: 88px;
-            height: 88px;
-            margin: 0 auto 12px;
+            width: 96px;
+            height: 96px;
+            margin: 0 auto 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            filter: drop-shadow(0 10px 22px rgba(255, 149, 0, 0.55));
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffe17a 0%, #ffb547 45%, #ff8a00 100%);
+            box-shadow: 0 14px 28px rgba(255, 149, 0, 0.45), inset 0 2px 6px rgba(255, 255, 255, 0.45), inset 0 -3px 10px rgba(180, 90, 0, 0.35);
+            padding: 18px;
+            box-sizing: border-box;
         }
 
         .finish-trophy img {
@@ -403,6 +409,7 @@
             height: 100%;
             object-fit: contain;
             display: block;
+            filter: drop-shadow(0 2px 4px rgba(120, 60, 0, 0.35));
         }
 
         .finish-eyebrow {
@@ -687,13 +694,9 @@
             box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
         }
 
-        .brand-logo {
-            background-size: 200% 200%;
-            animation: gradientShift 6s ease infinite;
-        }
-
         .brand:hover .brand-logo {
-            animation-duration: 2s;
+            transform: scale(1.04);
+            transition: transform .2s;
         }
 
         .user-pill {
@@ -706,9 +709,7 @@
         }
 
         .progress-bar-fill {
-            background-size: 200% 100%;
-            background-image: linear-gradient(90deg, #007aff, #5856d6, #007aff);
-            animation: shimmer 3s linear infinite;
+            background-image: linear-gradient(90deg, #007aff, #5856d6);
         }
 
         /* AUTH ANIMATIONS */
@@ -913,8 +914,6 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            background-size: 200% auto;
-            animation: gradientShift 8s ease infinite;
         }
 
         .greeting .user-name {
@@ -1369,8 +1368,7 @@
                 } else if (mode === 'verify') {
                     authTitle.textContent = 'Подтвердите email';
                     authSub.textContent = 'Мы отправили 6-значный код на ' + (pendingVerifyEmail || 'ваш email');
-                    authInfo.textContent = 'Проект запущен в тестовом режиме. Используйте код 676767';
-                    authInfo.classList.remove('hidden');
+                    authInfo.classList.add('hidden');
                     verifyForm.classList.remove('hidden');
                 }
             }
@@ -1632,16 +1630,17 @@
                 .quiz-container {
                     position: relative !important;
                     z-index: 20 !important;
-                    width: min(92%, 640px) !important;
-                    max-height: 88vh !important;
+                    width: min(86%, 520px) !important;
+                    max-height: 78vh !important;
                     overflow-y: auto !important;
-                    margin: 4vh auto 0 !important;
+                    margin: 3vh auto 0 !important;
                     background: rgba(255,255,255,0.06) !important;
                     backdrop-filter: blur(24px) saturate(160%) !important;
                     -webkit-backdrop-filter: blur(24px) saturate(160%) !important;
                     color: #fff !important;
-                    padding: 22px 26px 20px !important;
-                    border-radius: 24px !important;
+                    padding: 16px 20px 14px !important;
+                    border-radius: 20px !important;
+                    box-sizing: border-box !important;
                     border: 1px solid rgba(255,255,255,0.12) !important;
                     box-shadow: 0 30px 80px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.08) !important;
                     text-align: center !important;
@@ -1680,10 +1679,10 @@
                     to { opacity: 1; transform: none; }
                 }
                 .quiz-container h2 {
-                    font-size: clamp(16px, 2vw, 22px) !important;
+                    font-size: clamp(15px, 1.7vw, 19px) !important;
                     line-height: 1.3 !important;
                     font-weight: 700 !important;
-                    margin: 0 0 6px !important;
+                    margin: 0 0 4px !important;
                     color: #fff !important;
                     letter-spacing: -0.01em !important;
                     text-transform: none !important;
@@ -1702,8 +1701,8 @@
                 .quiz-options {
                     display: grid !important;
                     grid-template-columns: 1fr 1fr !important;
-                    gap: 10px !important;
-                    margin-top: 14px !important;
+                    gap: 8px !important;
+                    margin-top: 10px !important;
                 }
                 @media (max-width: 540px) {
                     .quiz-options { grid-template-columns: 1fr !important; }
@@ -1711,8 +1710,8 @@
                 .quiz-option {
                     display: flex !important;
                     align-items: center !important;
-                    gap: 12px !important;
-                    padding: 10px 14px !important;
+                    gap: 10px !important;
+                    padding: 8px 10px !important;
                     background: rgba(255,255,255,0.05) !important;
                     border: 1.5px solid rgba(255,255,255,0.14) !important;
                     border-radius: 14px !important;
@@ -1728,19 +1727,19 @@
                 .quiz-options { counter-reset: quizopt !important; }
                 .quiz-option::before {
                     content: counter(quizopt, upper-alpha);
-                    flex: 0 0 44px;
-                    height: 44px;
+                    flex: 0 0 54px;
+                    height: 54px;
                     display: inline-flex;
                     align-items: center;
                     justify-content: center;
                     background: linear-gradient(135deg, #4a7dff, #7a5cff);
-                    border-radius: 12px;
+                    border-radius: 14px;
                     font-weight: 800;
-                    font-size: 20px;
+                    font-size: 26px;
                     color: #fff;
-                    box-shadow: 0 6px 16px rgba(74,125,255,0.45), inset 0 1px 0 rgba(255,255,255,0.2);
+                    box-shadow: 0 8px 20px rgba(74,125,255,0.5), inset 0 1px 0 rgba(255,255,255,0.25);
                     transition: transform 0.2s, box-shadow .2s, background .2s;
-                    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+                    text-shadow: 0 1px 2px rgba(0,0,0,0.25);
                 }
                 .quiz-option:hover {
                     background: rgba(255,255,255,0.12) !important;
@@ -1889,14 +1888,19 @@
                         // Detect correct answer index by inspecting result text after click
                         opts.forEach(opt => {
                             opt.addEventListener('click', () => {
-                                // Defer until original handler updates result
+                                if (container.dataset.qsolved === '1') return;
+                                const before = (result.textContent || '').trim();
                                 setTimeout(() => {
-                                    const txt = (result.textContent || '').toLowerCase();
-                                    const isRight = txt.startsWith('правильно');
+                                    const after = (result.textContent || '').trim();
+                                    if (after === before) return;
+                                    const isRight = after.toLowerCase().startsWith('правильно');
                                     if (isRight) {
+                                        opts.forEach(o => o.classList.remove('is-wrong', 'is-correct'));
                                         opt.classList.add('is-correct');
+                                        container.dataset.qsolved = '1';
                                         launchInsideConfetti(doc);
                                     } else {
+                                        opts.forEach(o => o.classList.remove('is-wrong'));
                                         opt.classList.add('is-wrong');
                                         container.classList.remove('shake');
                                         void container.offsetWidth;
@@ -1904,7 +1908,7 @@
                                         doc.body.classList.add('quiz-redtint');
                                         setTimeout(() => doc.body.classList.remove('quiz-redtint'), 650);
                                     }
-                                }, 30);
+                                }, 50);
                             }, true);
                         });
                     });

@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Культура63 · Виртуальные экскурсии</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             background: #f5f5f7;
@@ -18,6 +26,7 @@
             display: flex;
             flex-direction: column;
         }
+
         .app {
             max-width: 1280px;
             margin: 0 auto;
@@ -33,79 +42,141 @@
             justify-content: space-between;
             margin-bottom: 2rem;
         }
+
         .brand {
-            display: flex; align-items: center; gap: 10px;
-            font-weight: 700; font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
         }
+
         .brand-logo {
-            width: 44px; height: 44px;
-            border-radius: 12px;
+            width: 44px;
+            height: 44px;
+            border-radius: 5px;
             background: #fff url('/static/logo.jpg') center/contain no-repeat;
-            box-shadow: 0 6px 16px rgba(88,86,214,0.25);
+            box-shadow: 0 6px 16px rgba(88, 86, 214, 0.25);
             border: 1px solid #ececf0;
             display: block;
         }
+
         .user-pill {
-            display: flex; align-items: center; gap: 10px;
-            background: #fff; padding: 6px 8px 6px 14px;
-            border-radius: 100px; border: 1px solid #e8e8ed;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #fff;
+            padding: 6px 8px 6px 14px;
+            border-radius: 100px;
+            border: 1px solid #e8e8ed;
         }
+
         .user-pill .avatar {
-            width: 32px; height: 32px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            background: linear-gradient(135deg,#007aff,#34c759);
-            color: white; font-weight: 700;
-            display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, #007aff, #34c759);
+            color: white;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 0.85rem;
         }
+
         .logout-btn {
-            background: none; border: none;
-            color: #6e6e73; cursor: pointer;
-            font-size: 0.85rem; padding: 4px 10px;
+            background: none;
+            border: none;
+            color: #6e6e73;
+            cursor: pointer;
+            font-size: 0.85rem;
+            padding: 4px 10px;
             border-radius: 100px;
         }
-        .logout-btn:hover { background: #f0f0f3; color: #1d1d1f; }
 
-        .selection-view { display: block; }
+        .logout-btn:hover {
+            background: #f0f0f3;
+            color: #1d1d1f;
+        }
+
+        .selection-view {
+            display: block;
+        }
+
         .player-view {
             display: none;
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #000; z-index: 100;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 100;
         }
-        .player-view.active { display: block; }
 
-        .greeting { margin-bottom: 2rem; }
-        .greeting h1 { font-size: 2.4rem; font-weight: 700; }
-        .greeting .user-name { color: #007aff; }
-        .greeting p { font-size: 1.15rem; color: #6e6e73; margin-top: 0.4rem; }
+        .player-view.active {
+            display: block;
+        }
+
+        .greeting {
+            margin-bottom: 2rem;
+        }
+
+        .greeting h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+        }
+
+        .greeting .user-name {
+            color: #007aff;
+        }
+
+        .greeting p {
+            font-size: 1.15rem;
+            color: #6e6e73;
+            margin-top: 0.4rem;
+        }
 
         .section-head {
-            display: flex; align-items: baseline; justify-content: space-between;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
             margin-bottom: 1.5rem;
         }
-        .section-title { font-size: 1.6rem; font-weight: 600; }
-        .section-count { color: #86868b; font-size: 0.95rem; }
+
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+
+        .section-count {
+            color: #86868b;
+            font-size: 0.95rem;
+        }
 
         .routes-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 1.5rem;
         }
+
         .route-card {
             background: #fff;
             border-radius: 24px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
             overflow: hidden;
-            display: flex; flex-direction: column;
+            display: flex;
+            flex-direction: column;
             border: 1px solid #ececf0;
             transition: transform .25s ease, box-shadow .25s ease;
             position: relative;
         }
+
         .route-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
         }
+
         .card-img {
             width: 100%;
             aspect-ratio: 16 / 9;
@@ -114,15 +185,19 @@
             background-position: center;
             position: relative;
         }
+
         .card-img::after {
             content: "";
-            position: absolute; inset: 0;
-            background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.55));
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.55));
         }
+
         .card-duration-badge {
             position: absolute;
-            top: 12px; left: 12px;
-            background: rgba(0,0,0,0.55);
+            top: 12px;
+            left: 12px;
+            background: rgba(0, 0, 0, 0.55);
             color: white;
             padding: 5px 11px;
             font-size: 0.78rem;
@@ -131,9 +206,11 @@
             backdrop-filter: blur(8px);
             z-index: 2;
         }
+
         .card-completed-badge {
             position: absolute;
-            top: 12px; right: 12px;
+            top: 12px;
+            right: 12px;
             background: #34c759;
             color: white;
             padding: 5px 11px;
@@ -142,11 +219,14 @@
             border-radius: 100px;
             z-index: 2;
         }
+
         .card-content {
             padding: 1.1rem 1.2rem 1.2rem;
-            display: flex; flex-direction: column;
+            display: flex;
+            flex-direction: column;
             flex: 1;
         }
+
         .card-title {
             font-weight: 700;
             font-size: 1.15rem;
@@ -157,6 +237,7 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
+
         .card-desc {
             font-size: 0.88rem;
             color: #6e6e73;
@@ -168,12 +249,14 @@
             flex: 1;
             min-height: 2.4em;
         }
+
         .progress-wrapper {
             display: flex;
             align-items: center;
             gap: 10px;
             margin-bottom: 0.9rem;
         }
+
         .progress-bar-bg {
             flex: 1;
             height: 6px;
@@ -181,13 +264,15 @@
             border-radius: 100px;
             overflow: hidden;
         }
+
         .progress-bar-fill {
             height: 100%;
             width: 0%;
-            background: linear-gradient(90deg,#007aff,#5856d6);
+            background: linear-gradient(90deg, #007aff, #5856d6);
             border-radius: 100px;
             transition: width .4s ease;
         }
+
         .progress-text {
             font-size: 0.75rem;
             color: #6e6e73;
@@ -195,6 +280,7 @@
             text-align: right;
             font-variant-numeric: tabular-nums;
         }
+
         .start-btn {
             background: #007aff;
             color: white;
@@ -208,23 +294,40 @@
             margin-top: auto;
             transition: background .15s;
         }
-        .start-btn:hover { background: #005bbf; }
-        .start-btn.continue { background: #34c759; }
-        .start-btn.continue:hover { background: #248a3d; }
-        .start-btn.replay { background: #1d1d1f; }
-        .start-btn.replay:hover { background: #000; }
+
+        .start-btn:hover {
+            background: #005bbf;
+        }
+
+        .start-btn.continue {
+            background: #34c759;
+        }
+
+        .start-btn.continue:hover {
+            background: #248a3d;
+        }
+
+        .start-btn.replay {
+            background: #1d1d1f;
+        }
+
+        .start-btn.replay:hover {
+            background: #000;
+        }
 
         /* PLAYER */
         .player-header {
             position: absolute;
-            top: 20px; left: 20px;
+            top: 20px;
+            left: 20px;
             z-index: 200;
         }
+
         .back-btn {
-            background: rgba(30,30,30,0.7);
+            background: rgba(30, 30, 30, 0.7);
             backdrop-filter: blur(8px);
             color: white;
-            border: 1px solid rgba(255,255,255,0.15);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 40px;
             padding: 10px 20px;
             font-weight: 500;
@@ -233,16 +336,22 @@
             align-items: center;
             gap: 6px;
         }
+
         .player-frame {
-            width: 100%; height: 100%;
-            border: none; display: block;
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
         }
 
         /* FINISH */
         .finish-overlay {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(ellipse at top, rgba(0,122,255,0.25), rgba(0,0,0,0.92) 70%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at top, rgba(0, 122, 255, 0.25), rgba(0, 0, 0, 0.92) 70%);
             backdrop-filter: blur(16px);
             display: flex;
             align-items: center;
@@ -251,8 +360,9 @@
             padding: 20px;
             overflow-y: auto;
         }
+
         .finish-card {
-            background: linear-gradient(180deg,#1c1c1e,#0f0f10);
+            background: linear-gradient(180deg, #1c1c1e, #0f0f10);
             border-radius: 24px;
             padding: 22px 24px 20px;
             max-width: 440px;
@@ -261,21 +371,40 @@
             overflow-y: auto;
             text-align: center;
             color: white;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
             position: relative;
-            animation: pop .4s cubic-bezier(.2,.9,.3,1.2);
+            animation: pop .4s cubic-bezier(.2, .9, .3, 1.2);
         }
-        @keyframes pop { from { opacity:0; transform: scale(.9) translateY(20px); } to { opacity:1; transform:none; } }
+
+        @keyframes pop {
+            from {
+                opacity: 0;
+                transform: scale(.9) translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
         .finish-trophy {
-            width: 88px; height: 88px;
+            width: 88px;
+            height: 88px;
             margin: 0 auto 12px;
-            display: flex; align-items: center; justify-content: center;
-            filter: drop-shadow(0 10px 22px rgba(255,149,0,0.55));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 10px 22px rgba(255, 149, 0, 0.55));
         }
+
         .finish-trophy img {
-            width: 100%; height: 100%; object-fit: contain;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
             display: block;
         }
+
         .finish-eyebrow {
             text-transform: uppercase;
             letter-spacing: 0.16em;
@@ -284,8 +413,20 @@
             font-weight: 700;
             margin-bottom: 4px;
         }
-        .finish-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 4px; line-height: 1.2; }
-        .finish-desc { font-size: 0.85rem; color: #98989e; margin-bottom: 14px; }
+
+        .finish-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            line-height: 1.2;
+        }
+
+        .finish-desc {
+            font-size: 0.85rem;
+            color: #98989e;
+            margin-bottom: 14px;
+        }
+
         .finish-preview {
             width: 100%;
             aspect-ratio: 16 / 9;
@@ -294,24 +435,43 @@
             border-radius: 14px;
             margin-bottom: 14px;
             background-color: #2c2c2e;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             max-height: 140px;
         }
+
         .finish-stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
             margin-bottom: 16px;
         }
+
         .stat-box {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 12px;
             padding: 10px 6px;
         }
-        .stat-value { font-size: 1.05rem; font-weight: 700; color: #fff; }
-        .stat-label { font-size: 0.65rem; color: #98989e; margin-top: 2px; text-transform: uppercase; letter-spacing: .08em; }
-        .finish-actions { display: flex; gap: 8px; }
+
+        .stat-value {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .stat-label {
+            font-size: 0.65rem;
+            color: #98989e;
+            margin-top: 2px;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+
+        .finish-actions {
+            display: flex;
+            gap: 8px;
+        }
+
         .finish-btn {
             flex: 1;
             background: #007aff;
@@ -323,10 +483,11 @@
             font-size: 0.9rem;
             cursor: pointer;
         }
+
         .finish-btn.secondary {
-            background: rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.08);
             color: white;
-            border: 1px solid rgba(255,255,255,0.12);
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
 
         .empty-message {
@@ -337,125 +498,317 @@
             border-radius: 28px;
             color: #86868b;
         }
+
         .loading-overlay {
-            position: fixed; inset: 0;
-            background: rgba(255,255,255,0.7);
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(4px);
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             z-index: 999;
         }
+
         .spinner {
-            width: 48px; height: 48px;
-            border: 5px solid rgba(0,122,255,0.2);
+            width: 48px;
+            height: 48px;
+            border: 5px solid rgba(0, 122, 255, 0.2);
             border-top-color: #007aff;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .hidden { display: none !important; }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
 
         /* ANIMATIONS */
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: none; }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
         }
+
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
+
         @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-12px); }
-            to { opacity: 1; transform: none; }
+            from {
+                opacity: 0;
+                transform: translateY(-12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
         }
+
         @keyframes shake {
-            0%,100% { transform: translateX(0); }
-            20%,60% { transform: translateX(-6px); }
-            40%,80% { transform: translateX(6px); }
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            20%,
+            60% {
+                transform: translateX(-6px);
+            }
+
+            40%,
+            80% {
+                transform: translateX(6px);
+            }
         }
+
         @keyframes float {
-            0%,100% { transform: translateY(0) rotate(0); }
-            50% { transform: translateY(-6px) rotate(2deg); }
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0);
+            }
+
+            50% {
+                transform: translateY(-6px) rotate(2deg);
+            }
         }
+
         @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
+            0% {
+                background-position: -200% 0;
+            }
+
+            100% {
+                background-position: 200% 0;
+            }
         }
+
         @keyframes pulseGlow {
-            0%,100% { box-shadow: 0 12px 30px rgba(255,149,0,0.45); }
-            50% { box-shadow: 0 12px 50px rgba(255,149,0,0.85); }
+
+            0%,
+            100% {
+                box-shadow: 0 12px 30px rgba(255, 149, 0, 0.45);
+            }
+
+            50% {
+                box-shadow: 0 12px 50px rgba(255, 149, 0, 0.85);
+            }
         }
+
         @keyframes confetti-fall {
-            0% { transform: translate(0,-20px) rotate(0); opacity: 1; }
-            100% { transform: translate(var(--cx,0), 110vh) rotate(720deg); opacity: 0; }
+            0% {
+                transform: translate(0, -20px) rotate(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(var(--cx, 0), 110vh) rotate(720deg);
+                opacity: 0;
+            }
         }
+
         @keyframes gradientShift {
-            0%,100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
         }
 
         /* ENTRANCE ANIMATIONS */
-        .topbar { animation: slideDown .5s ease both; }
-        .greeting { animation: fadeInUp .6s ease .05s both; }
-        .section-head { animation: fadeInUp .6s ease .15s both; }
-        .route-card { animation: fadeInUp .55s cubic-bezier(.2,.7,.3,1) both; }
+        .topbar {
+            animation: slideDown .5s ease both;
+        }
+
+        .greeting {
+            animation: fadeInUp .6s ease .05s both;
+        }
+
+        .section-head {
+            animation: fadeInUp .6s ease .15s both;
+        }
+
+        .route-card {
+            animation: fadeInUp .55s cubic-bezier(.2, .7, .3, 1) both;
+        }
 
         /* HOVER POLISH */
-        .route-card .card-img { transition: transform .5s ease; }
-        .route-card:hover .card-img { transform: scale(1.06); }
-        .start-btn { transition: background .15s, transform .15s, box-shadow .2s; }
-        .start-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 18px rgba(0,122,255,0.3); }
-        .start-btn:active { transform: translateY(0) scale(.98); }
-        .start-btn.continue:hover { box-shadow: 0 8px 18px rgba(52,199,89,0.35); }
-        .start-btn.replay:hover { box-shadow: 0 8px 18px rgba(0,0,0,0.35); }
+        .route-card .card-img {
+            transition: transform .5s ease;
+        }
+
+        .route-card:hover .card-img {
+            transform: scale(1.06);
+        }
+
+        .start-btn {
+            transition: background .15s, transform .15s, box-shadow .2s;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 18px rgba(0, 122, 255, 0.3);
+        }
+
+        .start-btn:active {
+            transform: translateY(0) scale(.98);
+        }
+
+        .start-btn.continue:hover {
+            box-shadow: 0 8px 18px rgba(52, 199, 89, 0.35);
+        }
+
+        .start-btn.replay:hover {
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+        }
 
         .brand-logo {
             background-size: 200% 200%;
             animation: gradientShift 6s ease infinite;
         }
-        .brand:hover .brand-logo { animation-duration: 2s; }
 
-        .user-pill { transition: transform .2s, box-shadow .2s; }
-        .user-pill:hover { transform: translateY(-1px); box-shadow: 0 6px 14px rgba(0,0,0,0.06); }
+        .brand:hover .brand-logo {
+            animation-duration: 2s;
+        }
+
+        .user-pill {
+            transition: transform .2s, box-shadow .2s;
+        }
+
+        .user-pill:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+        }
 
         .progress-bar-fill {
             background-size: 200% 100%;
-            background-image: linear-gradient(90deg,#007aff,#5856d6,#007aff);
+            background-image: linear-gradient(90deg, #007aff, #5856d6, #007aff);
             animation: shimmer 3s linear infinite;
         }
 
         /* AUTH ANIMATIONS */
-        .auth-card { animation: fadeInUp .5s cubic-bezier(.2,.7,.3,1) both; }
-        .auth-form { animation: fadeIn .35s ease both; }
-        .auth-btn { transition: background .15s, transform .15s, box-shadow .2s; }
-        .auth-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 8px 18px rgba(0,122,255,0.3); }
-        .auth-btn:active:not(:disabled) { transform: translateY(0) scale(.98); }
-        .auth-error { animation: shake .4s ease, slideDown .3s ease both; }
-        .auth-info { animation: slideDown .35s ease both; }
-        .field input { transition: border-color .15s, background .15s, box-shadow .2s, transform .15s; }
-        .field input:focus { box-shadow: 0 0 0 4px rgba(0,122,255,0.15); }
+        .auth-card {
+            animation: fadeInUp .5s cubic-bezier(.2, .7, .3, 1) both;
+        }
+
+        .auth-form {
+            animation: fadeIn .35s ease both;
+        }
+
+        .auth-btn {
+            transition: background .15s, transform .15s, box-shadow .2s;
+        }
+
+        .auth-btn:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 18px rgba(0, 122, 255, 0.3);
+        }
+
+        .auth-btn:active:not(:disabled) {
+            transform: translateY(0) scale(.98);
+        }
+
+        .auth-error {
+            animation: shake .4s ease, slideDown .3s ease both;
+        }
+
+        .auth-info {
+            animation: slideDown .35s ease both;
+        }
+
+        .field input {
+            transition: border-color .15s, background .15s, box-shadow .2s, transform .15s;
+        }
+
+        .field input:focus {
+            box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.15);
+        }
 
         /* FINISH ANIMATIONS */
         .finish-trophy {
             animation: float 3s ease-in-out infinite, pulseGlow 2.5s ease-in-out infinite;
         }
-        .finish-eyebrow { animation: fadeInUp .5s ease .15s both; }
-        .finish-title { animation: fadeInUp .5s ease .25s both; }
-        .finish-desc { animation: fadeInUp .5s ease .3s both; }
-        .finish-preview { animation: fadeInUp .5s ease .35s both; }
-        .stat-box { animation: fadeInUp .5s ease both; }
-        .stat-box:nth-child(1) { animation-delay: .4s; }
-        .stat-box:nth-child(2) { animation-delay: .5s; }
-        .stat-box:nth-child(3) { animation-delay: .6s; }
-        .finish-actions { animation: fadeInUp .5s ease .7s both; }
-        .finish-btn { transition: background .15s, transform .15s, box-shadow .2s; }
-        .finish-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 18px rgba(0,122,255,0.3); }
-        .finish-btn:active { transform: translateY(0) scale(.98); }
+
+        .finish-eyebrow {
+            animation: fadeInUp .5s ease .15s both;
+        }
+
+        .finish-title {
+            animation: fadeInUp .5s ease .25s both;
+        }
+
+        .finish-desc {
+            animation: fadeInUp .5s ease .3s both;
+        }
+
+        .finish-preview {
+            animation: fadeInUp .5s ease .35s both;
+        }
+
+        .stat-box {
+            animation: fadeInUp .5s ease both;
+        }
+
+        .stat-box:nth-child(1) {
+            animation-delay: .4s;
+        }
+
+        .stat-box:nth-child(2) {
+            animation-delay: .5s;
+        }
+
+        .stat-box:nth-child(3) {
+            animation-delay: .6s;
+        }
+
+        .finish-actions {
+            animation: fadeInUp .5s ease .7s both;
+        }
+
+        .finish-btn {
+            transition: background .15s, transform .15s, box-shadow .2s;
+        }
+
+        .finish-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 18px rgba(0, 122, 255, 0.3);
+        }
+
+        .finish-btn:active {
+            transform: translateY(0) scale(.98);
+        }
 
         /* CONFETTI */
         .confetti-piece {
             position: absolute;
             top: -10px;
-            width: 10px; height: 14px;
+            width: 10px;
+            height: 14px;
             border-radius: 2px;
             animation: confetti-fall linear forwards;
             pointer-events: none;
@@ -463,104 +816,210 @@
         }
 
         /* BACK BUTTON */
-        .back-btn { transition: background .15s, transform .15s; }
-        .back-btn:hover { background: rgba(50,50,50,0.85); transform: translateX(-2px); }
+        .back-btn {
+            transition: background .15s, transform .15s;
+        }
+
+        .back-btn:hover {
+            background: rgba(50, 50, 50, 0.85);
+            transform: translateX(-2px);
+        }
 
         /* MOBILE ORIENTATION LOCK FOR PLAYER */
         .rotate-overlay {
-            position: fixed; inset: 0;
+            position: fixed;
+            inset: 0;
             display: none;
-            align-items: center; justify-content: center;
+            align-items: center;
+            justify-content: center;
             text-align: center;
             background: linear-gradient(135deg, #0a0f1f, #1d2b4a);
             color: #fff;
             z-index: 999;
             padding: 24px;
         }
+
         .rotate-overlay .rotate-card {
             max-width: 320px;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 22px;
             padding: 28px 24px;
             backdrop-filter: blur(16px);
         }
+
         .rotate-icon {
-            width: 72px; height: 72px;
+            width: 72px;
+            height: 72px;
             margin: 0 auto 16px;
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border-radius: 50%;
-            background: linear-gradient(135deg,#007aff,#5856d6);
-            box-shadow: 0 12px 30px rgba(0,122,255,0.45);
+            background: linear-gradient(135deg, #007aff, #5856d6);
+            box-shadow: 0 12px 30px rgba(0, 122, 255, 0.45);
             animation: rotateHint 2.5s ease-in-out infinite;
         }
-        .rotate-icon svg { width: 36px; height: 36px; fill: #fff; }
-        @keyframes rotateHint {
-            0%,100% { transform: rotate(0); }
-            40% { transform: rotate(-90deg); }
-            70% { transform: rotate(-90deg); }
+
+        .rotate-icon svg {
+            width: 36px;
+            height: 36px;
+            fill: #fff;
         }
-        .rotate-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; }
-        .rotate-sub { color: #a8b3d1; font-size: 0.9rem; line-height: 1.45; }
+
+        @keyframes rotateHint {
+
+            0%,
+            100% {
+                transform: rotate(0);
+            }
+
+            40% {
+                transform: rotate(-90deg);
+            }
+
+            70% {
+                transform: rotate(-90deg);
+            }
+        }
+
+        .rotate-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .rotate-sub {
+            color: #a8b3d1;
+            font-size: 0.9rem;
+            line-height: 1.45;
+        }
+
         @media (max-width: 900px) and (orientation: portrait) {
-            .player-view.active .rotate-overlay { display: flex; }
+            .player-view.active .rotate-overlay {
+                display: flex;
+            }
+
             .player-view.active .player-frame,
             .player-view.active .player-header,
-            .player-view.active .finish-overlay { display: none !important; }
+            .player-view.active .finish-overlay {
+                display: none !important;
+            }
         }
 
         /* DASHBOARD POLISH */
         .greeting h1 {
-            background: linear-gradient(120deg,#1d1d1f 30%,#5856d6 70%,#007aff);
+            background: linear-gradient(120deg, #1d1d1f 30%, #5856d6 70%, #007aff);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             background-size: 200% auto;
             animation: gradientShift 8s ease infinite;
         }
+
         .greeting .user-name {
             color: #5856d6;
             -webkit-text-fill-color: #5856d6;
         }
-        .section-title { position: relative; display: inline-block; }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+
         .section-title::after {
             content: '';
             position: absolute;
-            left: 0; bottom: -6px;
-            width: 36px; height: 3px;
+            left: 0;
+            bottom: -6px;
+            width: 36px;
+            height: 3px;
             border-radius: 3px;
-            background: linear-gradient(90deg,#007aff,#5856d6);
-            animation: underlineGrow .7s cubic-bezier(.2,.8,.3,1) .3s both;
+            background: linear-gradient(90deg, #007aff, #5856d6);
+            animation: underlineGrow .7s cubic-bezier(.2, .8, .3, 1) .3s both;
         }
+
         @keyframes underlineGrow {
-            from { width: 0; opacity: 0; }
-            to { width: 36px; opacity: 1; }
+            from {
+                width: 0;
+                opacity: 0;
+            }
+
+            to {
+                width: 36px;
+                opacity: 1;
+            }
         }
-        .route-card { animation-delay: calc(var(--card-i, 0) * 0.07s + 0.2s); }
+
+        .route-card {
+            animation-delay: calc(var(--card-i, 0) * 0.07s + 0.2s);
+        }
+
         .card-completed-badge {
-            animation: badgePop .5s cubic-bezier(.2,.9,.3,1.4) both;
+            animation: badgePop .5s cubic-bezier(.2, .9, .3, 1.4) both;
         }
+
         @keyframes badgePop {
-            from { opacity: 0; transform: scale(.5); }
-            to { opacity: 1; transform: scale(1); }
+            from {
+                opacity: 0;
+                transform: scale(.5);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
-        .card-duration-badge { animation: fadeIn .6s ease both; }
+
+        .card-duration-badge {
+            animation: fadeIn .6s ease both;
+        }
 
         /* Mobile dashboard tweaks */
         @media (max-width: 600px) {
-            .app { padding: 1.25rem 1rem 3rem; }
-            .greeting h1 { font-size: 1.8rem; }
-            .greeting p { font-size: 1rem; }
-            .section-title { font-size: 1.3rem; }
-            .routes-grid { grid-template-columns: 1fr; gap: 1rem; }
-            .topbar { gap: 8px; }
-            .user-pill { padding: 4px 6px 4px 10px; }
-            .user-pill #userPillName { display: none; }
-            .auth-card { padding: 28px 22px; }
+            .app {
+                padding: 1.25rem 1rem 3rem;
+            }
+
+            .greeting h1 {
+                font-size: 1.8rem;
+            }
+
+            .greeting p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+
+            .routes-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .topbar {
+                gap: 8px;
+            }
+
+            .user-pill {
+                padding: 4px 6px 4px 10px;
+            }
+
+            .user-pill #userPillName {
+                display: none;
+            }
+
+            .auth-card {
+                padding: 28px 22px;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
+
+            *,
+            *::before,
+            *::after {
                 animation-duration: .001s !important;
                 transition-duration: .001s !important;
             }
@@ -569,37 +1028,60 @@
         /* AUTH */
         .auth-screen {
             min-height: 100vh;
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 20px;
             background:
-                radial-gradient(circle at 20% 20%, rgba(0,122,255,0.18), transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(88,86,214,0.18), transparent 50%),
+                radial-gradient(circle at 20% 20%, rgba(0, 122, 255, 0.18), transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(88, 86, 214, 0.18), transparent 50%),
                 #f5f5f7;
         }
+
         .auth-card {
             background: white;
             padding: 36px 32px;
             border-radius: 28px;
             width: 100%;
             max-width: 420px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
             border: 1px solid #ececf0;
         }
+
         .auth-logo {
-            width: 72px; height: 72px;
-            border-radius: 18px;
+            width: 72px;
+            height: 72px;
+            border-radius: 5px;
             background: #fff url('/static/logo.jpg') center/contain no-repeat;
             border: 1px solid #ececf0;
-            box-shadow: 0 12px 30px rgba(88,86,214,0.25);
+            box-shadow: 0 12px 30px rgba(88, 86, 214, 0.25);
             margin-bottom: 16px;
         }
-        .auth-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 4px; }
-        .auth-sub { color: #6e6e73; font-size: 0.95rem; margin-bottom: 22px; }
-        .field { margin-bottom: 14px; }
-        .field label {
-            display: block; font-size: 0.8rem; font-weight: 600;
-            color: #1d1d1f; margin-bottom: 6px;
+
+        .auth-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 4px;
         }
+
+        .auth-sub {
+            color: #6e6e73;
+            font-size: 0.95rem;
+            margin-bottom: 22px;
+        }
+
+        .field {
+            margin-bottom: 14px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 6px;
+        }
+
         .field input {
             width: 100%;
             padding: 12px 14px;
@@ -610,15 +1092,18 @@
             background: #fafafc;
             transition: border-color .15s, background .15s;
         }
+
         .field input:focus {
             outline: none;
             border-color: #007aff;
             background: white;
         }
+
         .auth-btn {
             width: 100%;
             background: #007aff;
-            color: white; border: none;
+            color: white;
+            border: none;
             padding: 13px;
             border-radius: 12px;
             font-weight: 600;
@@ -626,13 +1111,29 @@
             cursor: pointer;
             margin-top: 6px;
         }
-        .auth-btn:hover { background: #005bbf; }
-        .auth-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-        .auth-switch {
-            text-align: center; margin-top: 16px;
-            font-size: 0.9rem; color: #6e6e73;
+
+        .auth-btn:hover {
+            background: #005bbf;
         }
-        .auth-switch a { color: #007aff; cursor: pointer; font-weight: 600; }
+
+        .auth-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .auth-switch {
+            text-align: center;
+            margin-top: 16px;
+            font-size: 0.9rem;
+            color: #6e6e73;
+        }
+
+        .auth-switch a {
+            color: #007aff;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
         .auth-error {
             background: #ffefef;
             color: #c92a2a;
@@ -641,6 +1142,7 @@
             font-size: 0.85rem;
             margin-bottom: 14px;
         }
+
         .auth-info {
             background: #eaf4ff;
             color: #0058c8;
@@ -649,6 +1151,7 @@
             font-size: 0.85rem;
             margin-bottom: 14px;
         }
+
         .code-input {
             text-align: center;
             letter-spacing: 0.5em;
@@ -658,359 +1161,365 @@
         }
     </style>
 </head>
+
 <body>
 
-<!-- AUTH -->
-<div id="authScreen" class="auth-screen hidden">
-    <div class="auth-card">
-        <div class="auth-logo" aria-label="Культура63"></div>
-        <div id="authTitle" class="auth-title">Вход</div>
-        <div id="authSub" class="auth-sub">Войдите, чтобы продолжить виртуальные экскурсии</div>
-        <div id="authError" class="auth-error hidden"></div>
-        <div id="authInfo" class="auth-info hidden"></div>
+    <!-- AUTH -->
+    <div id="authScreen" class="auth-screen hidden">
+        <div class="auth-card">
+            <div class="auth-logo" aria-label="Культура63"></div>
+            <div id="authTitle" class="auth-title">Вход</div>
+            <div id="authSub" class="auth-sub">Войдите, чтобы продолжить виртуальные экскурсии</div>
+            <div id="authError" class="auth-error hidden"></div>
+            <div id="authInfo" class="auth-info hidden"></div>
 
-        <!-- LOGIN -->
-        <form id="loginForm" class="auth-form">
-            <div class="field">
-                <label>Email</label>
-                <input type="email" id="loginEmail" autocomplete="email" required>
-            </div>
-            <div class="field">
-                <label>Пароль</label>
-                <input type="password" id="loginPassword" autocomplete="current-password" required>
-            </div>
-            <button type="submit" class="auth-btn">Войти</button>
-            <div class="auth-switch">Нет аккаунта? <a id="goToSignup">Создать</a></div>
-        </form>
-
-        <!-- SIGNUP -->
-        <form id="signupForm" class="auth-form hidden">
-            <div class="field">
-                <label>Имя</label>
-                <input type="text" id="signupName" autocomplete="name" required>
-            </div>
-            <div class="field">
-                <label>Email</label>
-                <input type="email" id="signupEmail" autocomplete="email" required>
-            </div>
-            <div class="field">
-                <label>Пароль</label>
-                <input type="password" id="signupPassword" autocomplete="new-password" minlength="4" required>
-            </div>
-            <button type="submit" class="auth-btn">Создать аккаунт</button>
-            <div class="auth-switch">Уже есть аккаунт? <a id="goToLogin">Войти</a></div>
-        </form>
-
-        <!-- VERIFY -->
-        <form id="verifyForm" class="auth-form hidden">
-            <div class="field">
-                <label>Код подтверждения (6 цифр)</label>
-                <input type="text" id="verifyCode" maxlength="6" inputmode="numeric" pattern="[0-9]{6}" class="code-input" required>
-            </div>
-            <button type="submit" class="auth-btn">Подтвердить</button>
-            <div class="auth-switch"><a id="backFromVerify">Назад</a></div>
-        </form>
-    </div>
-</div>
-
-<!-- MAIN APP -->
-<div class="app hidden" id="appContainer">
-    <div class="topbar">
-        <div class="brand">
-            <div class="brand-logo" aria-label="Культура63"></div>
-            <span>Культура63</span>
-        </div>
-        <div class="user-pill">
-            <div class="avatar" id="userAvatar">?</div>
-            <span id="userPillName" style="font-weight:600;font-size:0.9rem;">Гость</span>
-            <button class="logout-btn" id="logoutBtn">Выйти</button>
-        </div>
-    </div>
-
-    <div id="selectionView" class="selection-view">
-        <div class="greeting">
-            <h1>Привет, <span class="user-name" id="userNameDisplay">Гость</span>!</h1>
-            <p>Давайте проведем виртуальную экскурсию.</p>
-        </div>
-        <div class="section-head">
-            <h2 class="section-title">Выберите маршрут</h2>
-            <span class="section-count" id="routeCount"></span>
-        </div>
-        <div id="routesContainer" class="routes-grid">
-            <div class="empty-message">Загрузка маршрутов...</div>
-        </div>
-    </div>
-</div>
-
-<div id="playerView" class="player-view">
-    <div class="player-header">
-        <button class="back-btn" id="backToMenuBtn">← Вернуться в меню</button>
-    </div>
-    <iframe id="routeIframe" class="player-frame" allow="fullscreen" sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals"></iframe>
-
-    <div class="rotate-overlay">
-        <div class="rotate-card">
-            <div class="rotate-icon">
-                <svg viewBox="0 0 24 24"><path d="M16.48 2.52a3 3 0 0 1 4.24 0l.76.76a3 3 0 0 1 0 4.24l-12 12a3 3 0 0 1-4.24 0l-.76-.76a3 3 0 0 1 0-4.24l12-12zM5.41 16.59l2 2 9.18-9.18-2-2-9.18 9.18zM18 4l-2 2 2 2 2-2-2-2zM3 13v2h2a7 7 0 0 1 7 7v2h2v-2a9 9 0 0 0-9-9H3z"/></svg>
-            </div>
-            <div class="rotate-title">Поверните устройство</div>
-            <div class="rotate-sub">Маршрут доступен только в горизонтальном (альбомном) режиме.</div>
-        </div>
-    </div>
-
-    <div id="finishOverlay" class="finish-overlay hidden">
-        <div class="finish-card">
-            <div class="finish-trophy"><img src="/static/trophy.png" alt="Trophy"></div>
-            <div class="finish-eyebrow">Маршрут завершён</div>
-            <div id="finishTitle" class="finish-title"></div>
-            <div id="finishDesc" class="finish-desc"></div>
-            <div id="finishPreview" class="finish-preview"></div>
-            <div class="finish-stats">
-                <div class="stat-box">
-                    <div class="stat-value" id="statSlides">0</div>
-                    <div class="stat-label">Слайдов</div>
+            <!-- LOGIN -->
+            <form id="loginForm" class="auth-form">
+                <div class="field">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" autocomplete="email" required>
                 </div>
-                <div class="stat-box">
-                    <div class="stat-value" id="statTime">—</div>
-                    <div class="stat-label">Время</div>
+                <div class="field">
+                    <label>Пароль</label>
+                    <input type="password" id="loginPassword" autocomplete="current-password" required>
                 </div>
-                <div class="stat-box">
-                    <div class="stat-value">100%</div>
-                    <div class="stat-label">Прогресс</div>
+                <button type="submit" class="auth-btn">Войти</button>
+                <div class="auth-switch">Нет аккаунта? <a id="goToSignup">Создать</a></div>
+            </form>
+
+            <!-- SIGNUP -->
+            <form id="signupForm" class="auth-form hidden">
+                <div class="field">
+                    <label>Имя</label>
+                    <input type="text" id="signupName" autocomplete="name" required>
                 </div>
+                <div class="field">
+                    <label>Email</label>
+                    <input type="email" id="signupEmail" autocomplete="email" required>
+                </div>
+                <div class="field">
+                    <label>Пароль</label>
+                    <input type="password" id="signupPassword" autocomplete="new-password" minlength="4" required>
+                </div>
+                <button type="submit" class="auth-btn">Создать аккаунт</button>
+                <div class="auth-switch">Уже есть аккаунт? <a id="goToLogin">Войти</a></div>
+            </form>
+
+            <!-- VERIFY -->
+            <form id="verifyForm" class="auth-form hidden">
+                <div class="field">
+                    <label>Код подтверждения (6 цифр)</label>
+                    <input type="text" id="verifyCode" maxlength="6" inputmode="numeric" pattern="[0-9]{6}"
+                        class="code-input" required>
+                </div>
+                <button type="submit" class="auth-btn">Подтвердить</button>
+                <div class="auth-switch"><a id="backFromVerify">Назад</a></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MAIN APP -->
+    <div class="app hidden" id="appContainer">
+        <div class="topbar">
+            <div class="brand">
+                <div class="brand-logo" aria-label="Культура63"></div>
+                <span>Культура63</span>
             </div>
-            <div class="finish-actions">
-                <button class="finish-btn secondary" id="finishReplayBtn">↻ Заново</button>
-                <button class="finish-btn" id="finishBackBtn">В меню →</button>
+            <div class="user-pill">
+                <div class="avatar" id="userAvatar">?</div>
+                <span id="userPillName" style="font-weight:600;font-size:0.9rem;">Гость</span>
+                <button class="logout-btn" id="logoutBtn">Выйти</button>
+            </div>
+        </div>
+
+        <div id="selectionView" class="selection-view">
+            <div class="greeting">
+                <h1>Привет, <span class="user-name" id="userNameDisplay">Гость</span>!</h1>
+                <p>Давайте проведем виртуальную экскурсию.</p>
+            </div>
+            <div class="section-head">
+                <h2 class="section-title">Выберите маршрут</h2>
+                <span class="section-count" id="routeCount"></span>
+            </div>
+            <div id="routesContainer" class="routes-grid">
+                <div class="empty-message">Загрузка маршрутов...</div>
             </div>
         </div>
     </div>
-</div>
 
-<div id="globalLoader" class="loading-overlay hidden">
-    <div class="spinner"></div>
-</div>
+    <div id="playerView" class="player-view">
+        <div class="player-header">
+            <button class="back-btn" id="backToMenuBtn">← Вернуться в меню</button>
+        </div>
+        <iframe id="routeIframe" class="player-frame" allow="fullscreen"
+            sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals"></iframe>
 
-<script>
-(function(){
-    const API_BASE = '/api';
-    const ROUTE_BASE = '/route';
-    let routesData = [];
-    let currentRouteId = null;
-    let currentRoute = null;
-    let currentSlides = null;
-    let progressInterval = null;
-    let currentUser = null;
+        <div class="rotate-overlay">
+            <div class="rotate-card">
+                <div class="rotate-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M16.48 2.52a3 3 0 0 1 4.24 0l.76.76a3 3 0 0 1 0 4.24l-12 12a3 3 0 0 1-4.24 0l-.76-.76a3 3 0 0 1 0-4.24l12-12zM5.41 16.59l2 2 9.18-9.18-2-2-9.18 9.18zM18 4l-2 2 2 2 2-2-2-2zM3 13v2h2a7 7 0 0 1 7 7v2h2v-2a9 9 0 0 0-9-9H3z" />
+                    </svg>
+                </div>
+                <div class="rotate-title">Поверните устройство</div>
+                <div class="rotate-sub">Маршрут доступен только в горизонтальном (альбомном) режиме.</div>
+            </div>
+        </div>
 
-    // Elements
-    const authScreen = document.getElementById('authScreen');
-    const appContainer = document.getElementById('appContainer');
-    const selectionView = document.getElementById('selectionView');
-    const playerView = document.getElementById('playerView');
-    const routesContainer = document.getElementById('routesContainer');
-    const routeCount = document.getElementById('routeCount');
-    const routeIframe = document.getElementById('routeIframe');
-    const backBtn = document.getElementById('backToMenuBtn');
-    const finishOverlay = document.getElementById('finishOverlay');
-    const finishBackBtn = document.getElementById('finishBackBtn');
-    const finishReplayBtn = document.getElementById('finishReplayBtn');
-    const globalLoader = document.getElementById('globalLoader');
-    const userNameSpan = document.getElementById('userNameDisplay');
-    const userPillName = document.getElementById('userPillName');
-    const userAvatar = document.getElementById('userAvatar');
-    const logoutBtn = document.getElementById('logoutBtn');
+        <div id="finishOverlay" class="finish-overlay hidden">
+            <div class="finish-card">
+                <div class="finish-trophy"><img src="/static/trophy.png" alt="Trophy"></div>
+                <div class="finish-eyebrow">Маршрут завершён</div>
+                <div id="finishTitle" class="finish-title"></div>
+                <div id="finishDesc" class="finish-desc"></div>
+                <div id="finishPreview" class="finish-preview"></div>
+                <div class="finish-stats">
+                    <div class="stat-box">
+                        <div class="stat-value" id="statSlides">0</div>
+                        <div class="stat-label">Слайдов</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="statTime">—</div>
+                        <div class="stat-label">Время</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">100%</div>
+                        <div class="stat-label">Прогресс</div>
+                    </div>
+                </div>
+                <div class="finish-actions">
+                    <button class="finish-btn secondary" id="finishReplayBtn">↻ Заново</button>
+                    <button class="finish-btn" id="finishBackBtn">В меню →</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    const finishPreview = document.getElementById('finishPreview');
-    const finishTitle = document.getElementById('finishTitle');
-    const finishDesc = document.getElementById('finishDesc');
-    const statSlides = document.getElementById('statSlides');
-    const statTime = document.getElementById('statTime');
+    <div id="globalLoader" class="loading-overlay hidden">
+        <div class="spinner"></div>
+    </div>
 
-    // Auth
-    const authError = document.getElementById('authError');
-    const authInfo = document.getElementById('authInfo');
-    const authTitle = document.getElementById('authTitle');
-    const authSub = document.getElementById('authSub');
-    const loginForm = document.getElementById('loginForm');
-    const signupForm = document.getElementById('signupForm');
-    const verifyForm = document.getElementById('verifyForm');
-    let pendingVerifyEmail = null;
+    <script>
+        (function () {
+            const API_BASE = '/api';
+            const ROUTE_BASE = '/route';
+            let routesData = [];
+            let currentRouteId = null;
+            let currentRoute = null;
+            let currentSlides = null;
+            let progressInterval = null;
+            let currentUser = null;
 
-    function showLoader(s) { globalLoader.classList.toggle('hidden', !s); }
-    function escapeHtml(t) { const d=document.createElement('div'); d.textContent=t||''; return d.innerHTML; }
+            // Elements
+            const authScreen = document.getElementById('authScreen');
+            const appContainer = document.getElementById('appContainer');
+            const selectionView = document.getElementById('selectionView');
+            const playerView = document.getElementById('playerView');
+            const routesContainer = document.getElementById('routesContainer');
+            const routeCount = document.getElementById('routeCount');
+            const routeIframe = document.getElementById('routeIframe');
+            const backBtn = document.getElementById('backToMenuBtn');
+            const finishOverlay = document.getElementById('finishOverlay');
+            const finishBackBtn = document.getElementById('finishBackBtn');
+            const finishReplayBtn = document.getElementById('finishReplayBtn');
+            const globalLoader = document.getElementById('globalLoader');
+            const userNameSpan = document.getElementById('userNameDisplay');
+            const userPillName = document.getElementById('userPillName');
+            const userAvatar = document.getElementById('userAvatar');
+            const logoutBtn = document.getElementById('logoutBtn');
 
-    // ---- AUTH UI ----
-    function showAuth() { authScreen.classList.remove('hidden'); appContainer.classList.add('hidden'); }
-    function showApp() { authScreen.classList.add('hidden'); appContainer.classList.remove('hidden'); }
+            const finishPreview = document.getElementById('finishPreview');
+            const finishTitle = document.getElementById('finishTitle');
+            const finishDesc = document.getElementById('finishDesc');
+            const statSlides = document.getElementById('statSlides');
+            const statTime = document.getElementById('statTime');
 
-    function setAuthMode(mode) {
-        authError.classList.add('hidden');
-        authInfo.classList.add('hidden');
-        loginForm.classList.add('hidden');
-        signupForm.classList.add('hidden');
-        verifyForm.classList.add('hidden');
-        if (mode === 'login') {
-            authTitle.textContent = 'Вход';
-            authSub.textContent = 'Войдите, чтобы продолжить виртуальные экскурсии';
-            loginForm.classList.remove('hidden');
-        } else if (mode === 'signup') {
-            authTitle.textContent = 'Регистрация';
-            authSub.textContent = 'Создайте аккаунт за 30 секунд';
-            signupForm.classList.remove('hidden');
-        } else if (mode === 'verify') {
-            authTitle.textContent = 'Подтвердите email';
-            authSub.textContent = 'Мы отправили 6-значный код на ' + (pendingVerifyEmail || 'ваш email');
-            authInfo.textContent = 'Проект запущен в тестовом режиме. Используйте код 676767';
-            authInfo.classList.remove('hidden');
-            verifyForm.classList.remove('hidden');
-        }
-    }
-    function showError(msg) { authError.textContent = msg; authError.classList.remove('hidden'); }
+            // Auth
+            const authError = document.getElementById('authError');
+            const authInfo = document.getElementById('authInfo');
+            const authTitle = document.getElementById('authTitle');
+            const authSub = document.getElementById('authSub');
+            const loginForm = document.getElementById('loginForm');
+            const signupForm = document.getElementById('signupForm');
+            const verifyForm = document.getElementById('verifyForm');
+            let pendingVerifyEmail = null;
 
-    document.getElementById('goToSignup').addEventListener('click', () => setAuthMode('signup'));
-    document.getElementById('goToLogin').addEventListener('click', () => setAuthMode('login'));
-    document.getElementById('backFromVerify').addEventListener('click', () => setAuthMode('login'));
+            function showLoader(s) {globalLoader.classList.toggle('hidden', !s);}
+            function escapeHtml(t) {const d = document.createElement('div'); d.textContent = t || ''; return d.innerHTML;}
 
-    loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        authError.classList.add('hidden');
-        const email = document.getElementById('loginEmail').value.trim();
-        const password = document.getElementById('loginPassword').value;
-        try {
-            const res = await fetch(`${API_BASE}/auth/login`, {
-                method: 'POST', headers: {'Content-Type':'application/json'},
-                body: JSON.stringify({ email, password })
+            // ---- AUTH UI ----
+            function showAuth() {authScreen.classList.remove('hidden'); appContainer.classList.add('hidden');}
+            function showApp() {authScreen.classList.add('hidden'); appContainer.classList.remove('hidden');}
+
+            function setAuthMode(mode) {
+                authError.classList.add('hidden');
+                authInfo.classList.add('hidden');
+                loginForm.classList.add('hidden');
+                signupForm.classList.add('hidden');
+                verifyForm.classList.add('hidden');
+                if (mode === 'login') {
+                    authTitle.textContent = 'Вход';
+                    authSub.textContent = 'Войдите, чтобы продолжить виртуальные экскурсии';
+                    loginForm.classList.remove('hidden');
+                } else if (mode === 'signup') {
+                    authTitle.textContent = 'Регистрация';
+                    authSub.textContent = 'Создайте аккаунт за 30 секунд';
+                    signupForm.classList.remove('hidden');
+                } else if (mode === 'verify') {
+                    authTitle.textContent = 'Подтвердите email';
+                    authSub.textContent = 'Мы отправили 6-значный код на ' + (pendingVerifyEmail || 'ваш email');
+                    authInfo.textContent = 'Проект запущен в тестовом режиме. Используйте код 676767';
+                    authInfo.classList.remove('hidden');
+                    verifyForm.classList.remove('hidden');
+                }
+            }
+            function showError(msg) {authError.textContent = msg; authError.classList.remove('hidden');}
+
+            document.getElementById('goToSignup').addEventListener('click', () => setAuthMode('signup'));
+            document.getElementById('goToLogin').addEventListener('click', () => setAuthMode('login'));
+            document.getElementById('backFromVerify').addEventListener('click', () => setAuthMode('login'));
+
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                authError.classList.add('hidden');
+                const email = document.getElementById('loginEmail').value.trim();
+                const password = document.getElementById('loginPassword').value;
+                try {
+                    const res = await fetch(`${API_BASE}/auth/login`, {
+                        method: 'POST', headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({email, password})
+                    });
+                    const data = await res.json();
+                    if (!res.ok) {
+                        if (data.needsVerification) {
+                            pendingVerifyEmail = email;
+                            setAuthMode('verify');
+                            return;
+                        }
+                        showError(data.error || 'Ошибка входа');
+                        return;
+                    }
+                    currentUser = data.user;
+                    enterApp();
+                } catch (err) {showError('Ошибка соединения');}
             });
-            const data = await res.json();
-            if (!res.ok) {
-                if (data.needsVerification) {
+
+            signupForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                authError.classList.add('hidden');
+                const name = document.getElementById('signupName').value.trim();
+                const email = document.getElementById('signupEmail').value.trim();
+                const password = document.getElementById('signupPassword').value;
+                try {
+                    const res = await fetch(`${API_BASE}/auth/register`, {
+                        method: 'POST', headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({name, email, password})
+                    });
+                    const data = await res.json();
+                    if (!res.ok) {showError(data.error || 'Ошибка регистрации'); return;}
                     pendingVerifyEmail = email;
                     setAuthMode('verify');
-                    return;
-                }
-                showError(data.error || 'Ошибка входа');
-                return;
-            }
-            currentUser = data.user;
-            enterApp();
-        } catch (err) { showError('Ошибка соединения'); }
-    });
-
-    signupForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        authError.classList.add('hidden');
-        const name = document.getElementById('signupName').value.trim();
-        const email = document.getElementById('signupEmail').value.trim();
-        const password = document.getElementById('signupPassword').value;
-        try {
-            const res = await fetch(`${API_BASE}/auth/register`, {
-                method: 'POST', headers: {'Content-Type':'application/json'},
-                body: JSON.stringify({ name, email, password })
+                } catch (err) {showError('Ошибка соединения');}
             });
-            const data = await res.json();
-            if (!res.ok) { showError(data.error || 'Ошибка регистрации'); return; }
-            pendingVerifyEmail = email;
-            setAuthMode('verify');
-        } catch (err) { showError('Ошибка соединения'); }
-    });
 
-    verifyForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        authError.classList.add('hidden');
-        const code = document.getElementById('verifyCode').value.trim();
-        try {
-            const res = await fetch(`${API_BASE}/auth/verify`, {
-                method: 'POST', headers: {'Content-Type':'application/json'},
-                body: JSON.stringify({ email: pendingVerifyEmail, code })
+            verifyForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                authError.classList.add('hidden');
+                const code = document.getElementById('verifyCode').value.trim();
+                try {
+                    const res = await fetch(`${API_BASE}/auth/verify`, {
+                        method: 'POST', headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({email: pendingVerifyEmail, code})
+                    });
+                    const data = await res.json();
+                    if (!res.ok) {showError(data.error || 'Неверный код'); return;}
+                    currentUser = data.user;
+                    enterApp();
+                } catch (err) {showError('Ошибка соединения');}
             });
-            const data = await res.json();
-            if (!res.ok) { showError(data.error || 'Неверный код'); return; }
-            currentUser = data.user;
-            enterApp();
-        } catch (err) { showError('Ошибка соединения'); }
-    });
 
-    logoutBtn.addEventListener('click', async () => {
-        await fetch(`${API_BASE}/auth/logout`, { method: 'POST' });
-        currentUser = null;
-        showAuth();
-        setAuthMode('login');
-    });
-
-    function enterApp() {
-        if (!currentUser) return;
-        userNameSpan.textContent = currentUser.name;
-        userPillName.textContent = currentUser.name;
-        userAvatar.textContent = (currentUser.name || '?').charAt(0).toUpperCase();
-        showApp();
-        fetchRoutes();
-    }
-
-    async function checkSession() {
-        try {
-            const res = await fetch(`${API_BASE}/auth/me`);
-            const data = await res.json();
-            if (data.user) {
-                currentUser = data.user;
-                enterApp();
-            } else {
+            logoutBtn.addEventListener('click', async () => {
+                await fetch(`${API_BASE}/auth/logout`, {method: 'POST'});
+                currentUser = null;
                 showAuth();
                 setAuthMode('login');
+            });
+
+            function enterApp() {
+                if (!currentUser) return;
+                userNameSpan.textContent = currentUser.name;
+                userPillName.textContent = currentUser.name;
+                userAvatar.textContent = (currentUser.name || '?').charAt(0).toUpperCase();
+                showApp();
+                fetchRoutes();
             }
-        } catch {
-            showAuth(); setAuthMode('login');
-        }
-    }
 
-    // ---- ROUTES ----
-    function getStoredProgress(id) {
-        const v = localStorage.getItem(`route_progress_${id}`);
-        return v ? parseInt(v,10) : 0;
-    }
-    function setStoredProgress(id, val) {
-        localStorage.setItem(`route_progress_${id}`, val);
-    }
-    function calcPercent(c, t) { return t ? Math.min(100, Math.round((c/t)*100)) : 0; }
-
-    async function fetchRoutes() {
-        showLoader(true);
-        try {
-            const res = await fetch(`${API_BASE}/routes`);
-            const data = await res.json();
-            routesData = data.routes || [];
-            renderCards();
-        } catch(e) {
-            routesContainer.innerHTML = `<div class="empty-message">⚠️ Ошибка загрузки</div>`;
-        } finally { showLoader(false); }
-    }
-
-    function renderCards() {
-        if(!routesData.length) {
-            routeCount.textContent = '';
-            routesContainer.innerHTML = `<div class="empty-message">Маршруты не найдены.<br>Добавьте .irf в папку routes/</div>`;
-            return;
-        }
-        routeCount.textContent = `${routesData.length} ${pluralize(routesData.length, 'маршрут','маршрута','маршрутов')}`;
-        let html = '';
-        routesData.forEach(r => {
-            const comp = getStoredProgress(r.id);
-            const total = r.totalSlides || 0;
-            const perc = calcPercent(comp, total);
-            const completed = total > 0 && comp >= total;
-            const inProgress = comp > 0 && !completed;
-
-            let imgStyle = '';
-            if (r.pic) {
-                const imgUrl = `${ROUTE_BASE}/${encodeURIComponent(r.id)}/assets/${encodeURIComponent(r.pic)}`;
-                imgStyle = `background-image: url('${imgUrl}');`;
+            async function checkSession() {
+                try {
+                    const res = await fetch(`${API_BASE}/auth/me`);
+                    const data = await res.json();
+                    if (data.user) {
+                        currentUser = data.user;
+                        enterApp();
+                    } else {
+                        showAuth();
+                        setAuthMode('login');
+                    }
+                } catch {
+                    showAuth(); setAuthMode('login');
+                }
             }
-            const desc = r.desc ? escapeHtml(r.desc) : 'Описание скоро появится';
-            const time = r.time ? `⏱ ${escapeHtml(r.time)}` : '';
-            const completedBadge = completed ? `<div class="card-completed-badge">✓ Пройден</div>` : '';
-            const btnClass = completed ? 'replay' : (inProgress ? 'continue' : '');
-            const btnText = completed ? 'Пройти заново' : (inProgress ? 'Продолжить' : 'Начать маршрут');
 
-            html += `
+            // ---- ROUTES ----
+            function getStoredProgress(id) {
+                const v = localStorage.getItem(`route_progress_${id}`);
+                return v ? parseInt(v, 10) : 0;
+            }
+            function setStoredProgress(id, val) {
+                localStorage.setItem(`route_progress_${id}`, val);
+            }
+            function calcPercent(c, t) {return t ? Math.min(100, Math.round((c / t) * 100)) : 0;}
+
+            async function fetchRoutes() {
+                showLoader(true);
+                try {
+                    const res = await fetch(`${API_BASE}/routes`);
+                    const data = await res.json();
+                    routesData = data.routes || [];
+                    renderCards();
+                } catch (e) {
+                    routesContainer.innerHTML = `<div class="empty-message">⚠️ Ошибка загрузки</div>`;
+                } finally {showLoader(false);}
+            }
+
+            function renderCards() {
+                if (!routesData.length) {
+                    routeCount.textContent = '';
+                    routesContainer.innerHTML = `<div class="empty-message">Маршруты не найдены.<br>Добавьте .irf в папку routes/</div>`;
+                    return;
+                }
+                routeCount.textContent = `${routesData.length} ${pluralize(routesData.length, 'маршрут', 'маршрута', 'маршрутов')}`;
+                let html = '';
+                routesData.forEach(r => {
+                    const comp = getStoredProgress(r.id);
+                    const total = r.totalSlides || 0;
+                    const perc = calcPercent(comp, total);
+                    const completed = total > 0 && comp >= total;
+                    const inProgress = comp > 0 && !completed;
+
+                    let imgStyle = '';
+                    if (r.pic) {
+                        const imgUrl = `${ROUTE_BASE}/${encodeURIComponent(r.id)}/assets/${encodeURIComponent(r.pic)}`;
+                        imgStyle = `background-image: url('${imgUrl}');`;
+                    }
+                    const desc = r.desc ? escapeHtml(r.desc) : 'Описание скоро появится';
+                    const time = r.time ? `⏱ ${escapeHtml(r.time)}` : '';
+                    const completedBadge = completed ? `<div class="card-completed-badge">✓ Пройден</div>` : '';
+                    const btnClass = completed ? 'replay' : (inProgress ? 'continue' : '');
+                    const btnText = completed ? 'Пройти заново' : (inProgress ? 'Продолжить' : 'Начать маршрут');
+
+                    html += `
                 <div class="route-card" style="--card-i:${routesData.indexOf(r)};">
                     <div class="card-img" style="${imgStyle}">
                         ${time ? `<div class="card-duration-badge">${time}</div>` : ''}
@@ -1026,55 +1535,55 @@
                         <button class="start-btn ${btnClass}" data-id="${r.id}">${btnText}</button>
                     </div>
                 </div>`;
-        });
-        routesContainer.innerHTML = html;
-        document.querySelectorAll('.start-btn').forEach(b => b.addEventListener('click', ()=> startRoute(b.dataset.id)));
-    }
+                });
+                routesContainer.innerHTML = html;
+                document.querySelectorAll('.start-btn').forEach(b => b.addEventListener('click', () => startRoute(b.dataset.id)));
+            }
 
-    function pluralize(n, one, few, many) {
-        const mod10 = n % 10, mod100 = n % 100;
-        if (mod10 === 1 && mod100 !== 11) return one;
-        if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return few;
-        return many;
-    }
+            function pluralize(n, one, few, many) {
+                const mod10 = n % 10, mod100 = n % 100;
+                if (mod10 === 1 && mod100 !== 11) return one;
+                if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return few;
+                return many;
+            }
 
-    let routeStartTime = 0;
+            let routeStartTime = 0;
 
-    function startRoute(routeId) {
-        const route = routesData.find(r=>r.id===routeId);
-        if(!route) return;
-        currentRouteId = routeId;
-        currentRoute = route;
-        routeStartTime = Date.now();
-        // reset progress if replaying after completion
-        if (getStoredProgress(routeId) >= (route.totalSlides || 0) && (route.totalSlides||0) > 0) {
-            setStoredProgress(routeId, 0);
-        }
-        selectionView.style.display = 'none';
-        playerView.classList.add('active');
-        finishOverlay.classList.add('hidden');
-        currentSlides = null;
-        fetch(`${API_BASE}/route/${encodeURIComponent(routeId)}/slides`, {credentials:'same-origin'})
-            .then(r => r.ok ? r.json() : {slides:[]})
-            .then(d => { currentSlides = d.slides || []; applySlideFixes(); })
-            .catch(() => { currentSlides = []; });
-        routeIframe.src = `${ROUTE_BASE}/${encodeURIComponent(routeId)}/index.html`;
-        showLoader(true);
-        routeIframe.onload = () => {
-            showLoader(false);
-            injectCounterStyle();
-            applySlideFixes();
-            startProgressTracking();
-        };
-        routeIframe.onerror = () => { showLoader(false); alert('Ошибка загрузки маршрута'); };
-    }
+            function startRoute(routeId) {
+                const route = routesData.find(r => r.id === routeId);
+                if (!route) return;
+                currentRouteId = routeId;
+                currentRoute = route;
+                routeStartTime = Date.now();
+                // reset progress if replaying after completion
+                if (getStoredProgress(routeId) >= (route.totalSlides || 0) && (route.totalSlides || 0) > 0) {
+                    setStoredProgress(routeId, 0);
+                }
+                selectionView.style.display = 'none';
+                playerView.classList.add('active');
+                finishOverlay.classList.add('hidden');
+                currentSlides = null;
+                fetch(`${API_BASE}/route/${encodeURIComponent(routeId)}/slides`, {credentials: 'same-origin'})
+                    .then(r => r.ok ? r.json() : {slides: []})
+                    .then(d => {currentSlides = d.slides || []; applySlideFixes();})
+                    .catch(() => {currentSlides = [];});
+                routeIframe.src = `${ROUTE_BASE}/${encodeURIComponent(routeId)}/index.html`;
+                showLoader(true);
+                routeIframe.onload = () => {
+                    showLoader(false);
+                    injectCounterStyle();
+                    applySlideFixes();
+                    startProgressTracking();
+                };
+                routeIframe.onerror = () => {showLoader(false); alert('Ошибка загрузки маршрута');};
+            }
 
-    function injectCounterStyle() {
-        try {
-            const doc = routeIframe.contentDocument || routeIframe.contentWindow.document;
-            if(!doc) return;
-            const style = doc.createElement('style');
-            style.textContent = `
+            function injectCounterStyle() {
+                try {
+                    const doc = routeIframe.contentDocument || routeIframe.contentWindow.document;
+                    if (!doc) return;
+                    const style = doc.createElement('style');
+                    style.textContent = `
                 #progress-counter {
                     bottom: auto !important;
                     top: 20px !important;
@@ -1331,188 +1840,189 @@
                     left: 0 !important;
                 }
             `;
-            doc.head.appendChild(style);
+                    doc.head.appendChild(style);
 
-            // Hook reveal slidechange to fix panoramas + re-render messages
-            const win = routeIframe.contentWindow;
-            const wireReveal = () => {
-                if (!win || !win.Reveal || !win.Reveal.on) { setTimeout(wireReveal, 200); return; }
-                const onChange = () => {
-                    try { win.dispatchEvent(new Event('resize')); } catch(e) {}
-                    applySlideFixes();
-                    hookQuizAnimations();
-                };
-                win.Reveal.on('slidechanged', onChange);
-                win.Reveal.on('ready', onChange);
-                onChange();
-            };
-            wireReveal();
-        } catch(e) {}
-    }
+                    // Hook reveal slidechange to fix panoramas + re-render messages
+                    const win = routeIframe.contentWindow;
+                    const wireReveal = () => {
+                        if (!win || !win.Reveal || !win.Reveal.on) {setTimeout(wireReveal, 200); return;}
+                        const onChange = () => {
+                            try {win.dispatchEvent(new Event('resize'));} catch (e) { }
+                            applySlideFixes();
+                            hookQuizAnimations();
+                        };
+                        win.Reveal.on('slidechanged', onChange);
+                        win.Reveal.on('ready', onChange);
+                        onChange();
+                    };
+                    wireReveal();
+                } catch (e) { }
+            }
 
-    function launchInsideConfetti(doc) {
-        const colors = ['#007aff','#5856d6','#34c759','#ffd60a','#ff9500','#ff2d55'];
-        for (let i = 0; i < 50; i++) {
-            const piece = doc.createElement('div');
-            piece.className = 'quiz-confetti';
-            piece.style.left = Math.random() * 100 + '%';
-            piece.style.background = colors[Math.floor(Math.random()*colors.length)];
-            piece.style.setProperty('--cx', (Math.random()*200 - 100) + 'px');
-            piece.style.animationDuration = (2.2 + Math.random()*1.8) + 's';
-            piece.style.animationDelay = (Math.random()*0.3) + 's';
-            doc.body.appendChild(piece);
-            setTimeout(() => piece.remove(), 4500);
-        }
-    }
+            function launchInsideConfetti(doc) {
+                const colors = ['#007aff', '#5856d6', '#34c759', '#ffd60a', '#ff9500', '#ff2d55'];
+                for (let i = 0; i < 50; i++) {
+                    const piece = doc.createElement('div');
+                    piece.className = 'quiz-confetti';
+                    piece.style.left = Math.random() * 100 + '%';
+                    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    piece.style.setProperty('--cx', (Math.random() * 200 - 100) + 'px');
+                    piece.style.animationDuration = (2.2 + Math.random() * 1.8) + 's';
+                    piece.style.animationDelay = (Math.random() * 0.3) + 's';
+                    doc.body.appendChild(piece);
+                    setTimeout(() => piece.remove(), 4500);
+                }
+            }
 
-    function hookQuizAnimations() {
-        try {
-            const doc = routeIframe.contentDocument;
-            if (!doc) return;
-            const containers = doc.querySelectorAll('.quiz-container');
-            containers.forEach(container => {
-                if (container.dataset.qhooked === '1') return;
-                container.dataset.qhooked = '1';
-                const optionsWrap = container.querySelector('.quiz-options');
-                const result = container.querySelector('[id^="quiz-result-"]');
-                if (!optionsWrap || !result) return;
-                const opts = Array.from(optionsWrap.querySelectorAll('.quiz-option'));
-                // Detect correct answer index by inspecting result text after click
-                opts.forEach(opt => {
-                    opt.addEventListener('click', () => {
-                        // Defer until original handler updates result
-                        setTimeout(() => {
-                            const txt = (result.textContent || '').toLowerCase();
-                            const isRight = txt.startsWith('правильно');
-                            if (isRight) {
-                                opt.classList.add('is-correct');
-                                launchInsideConfetti(doc);
-                            } else {
-                                opt.classList.add('is-wrong');
-                                container.classList.remove('shake');
-                                void container.offsetWidth;
-                                container.classList.add('shake');
-                                doc.body.classList.add('quiz-redtint');
-                                setTimeout(() => doc.body.classList.remove('quiz-redtint'), 650);
+            function hookQuizAnimations() {
+                try {
+                    const doc = routeIframe.contentDocument;
+                    if (!doc) return;
+                    const containers = doc.querySelectorAll('.quiz-container');
+                    containers.forEach(container => {
+                        if (container.dataset.qhooked === '1') return;
+                        container.dataset.qhooked = '1';
+                        const optionsWrap = container.querySelector('.quiz-options');
+                        const result = container.querySelector('[id^="quiz-result-"]');
+                        if (!optionsWrap || !result) return;
+                        const opts = Array.from(optionsWrap.querySelectorAll('.quiz-option'));
+                        // Detect correct answer index by inspecting result text after click
+                        opts.forEach(opt => {
+                            opt.addEventListener('click', () => {
+                                // Defer until original handler updates result
+                                setTimeout(() => {
+                                    const txt = (result.textContent || '').toLowerCase();
+                                    const isRight = txt.startsWith('правильно');
+                                    if (isRight) {
+                                        opt.classList.add('is-correct');
+                                        launchInsideConfetti(doc);
+                                    } else {
+                                        opt.classList.add('is-wrong');
+                                        container.classList.remove('shake');
+                                        void container.offsetWidth;
+                                        container.classList.add('shake');
+                                        doc.body.classList.add('quiz-redtint');
+                                        setTimeout(() => doc.body.classList.remove('quiz-redtint'), 650);
+                                    }
+                                }, 30);
+                            }, true);
+                        });
+                    });
+                } catch (e) { }
+            }
+
+            function applySlideFixes() {
+                if (!currentSlides || !routeIframe.contentDocument) return;
+                try {
+                    const doc = routeIframe.contentDocument;
+                    currentSlides.forEach((slide, idx) => {
+                        const msgs = slide.messages || [];
+                        if (!msgs.length) return;
+                        const titleEl = doc.getElementById('textbox-title-' + idx);
+                        const textEl = doc.getElementById('textbox-text-' + idx);
+                        const cont = doc.getElementById('textbox-container-' + idx);
+                        if (!titleEl || !textEl) return;
+                        const m = msgs[0];
+                        if (!titleEl.textContent.trim() || titleEl.dataset.injected !== '1') {
+                            titleEl.textContent = m.title || '';
+                            textEl.textContent = m.text || '';
+                            titleEl.dataset.injected = '1';
+                        }
+                        if (cont) cont.style.display = 'flex';
+                    });
+                } catch (e) { }
+            }
+
+            function startProgressTracking() {
+                if (progressInterval) clearInterval(progressInterval);
+                progressInterval = setInterval(() => {
+                    try {
+                        const win = routeIframe.contentWindow;
+                        if (!win) return;
+                        const completed = win.COMPLETED;
+                        const total = (currentSlides && currentSlides.length)
+                            || (currentRoute && currentRoute.totalSlides)
+                            || win.totalSlides;
+                        if (typeof completed !== 'undefined' && typeof total !== 'undefined') {
+                            setStoredProgress(currentRouteId, completed);
+                            if (completed >= total && total > 0) {
+                                showFinishScreen();
                             }
-                        }, 30);
-                    }, true);
-                });
-            });
-        } catch(e) {}
-    }
+                        }
+                    } catch (e) { }
+                }, 800);
+            }
 
-    function applySlideFixes() {
-        if (!currentSlides || !routeIframe.contentDocument) return;
-        try {
-            const doc = routeIframe.contentDocument;
-            currentSlides.forEach((slide, idx) => {
-                const msgs = slide.messages || [];
-                if (!msgs.length) return;
-                const titleEl = doc.getElementById('textbox-title-' + idx);
-                const textEl = doc.getElementById('textbox-text-' + idx);
-                const cont = doc.getElementById('textbox-container-' + idx);
-                if (!titleEl || !textEl) return;
-                const m = msgs[0];
-                if (!titleEl.textContent.trim() || titleEl.dataset.injected !== '1') {
-                    titleEl.textContent = m.title || '';
-                    textEl.textContent = m.text || '';
-                    titleEl.dataset.injected = '1';
+            function formatElapsed(ms) {
+                const sec = Math.max(0, Math.round(ms / 1000));
+                const m = Math.floor(sec / 60);
+                const s = sec % 60;
+                return `${m}:${s.toString().padStart(2, '0')}`;
+            }
+
+            function launchConfetti() {
+                const colors = ['#007aff', '#5856d6', '#34c759', '#ffd60a', '#ff9500', '#ff2d55'];
+                const overlay = finishOverlay;
+                for (let i = 0; i < 60; i++) {
+                    const piece = document.createElement('div');
+                    piece.className = 'confetti-piece';
+                    piece.style.left = Math.random() * 100 + '%';
+                    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    piece.style.setProperty('--cx', (Math.random() * 200 - 100) + 'px');
+                    piece.style.animationDuration = (2.5 + Math.random() * 2) + 's';
+                    piece.style.animationDelay = (Math.random() * 0.4) + 's';
+                    overlay.appendChild(piece);
+                    setTimeout(() => piece.remove(), 5000);
                 }
-                if (cont) cont.style.display = 'flex';
-            });
-        } catch(e) {}
-    }
+            }
 
-    function startProgressTracking() {
-        if(progressInterval) clearInterval(progressInterval);
-        progressInterval = setInterval(() => {
-            try {
-                const win = routeIframe.contentWindow;
-                if(!win) return;
-                const completed = win.COMPLETED;
-                const total = (currentSlides && currentSlides.length)
-                    || (currentRoute && currentRoute.totalSlides)
-                    || win.totalSlides;
-                if(typeof completed !== 'undefined' && typeof total !== 'undefined') {
-                    setStoredProgress(currentRouteId, completed);
-                    if(completed >= total && total > 0) {
-                        showFinishScreen();
-                    }
+            function showFinishScreen() {
+                if (!currentRoute) return;
+                stopTracking();
+                finishTitle.textContent = currentRoute.name;
+                finishDesc.textContent = currentRoute.desc || 'Поздравляем! Вы успешно прошли маршрут.';
+                const total = currentRoute.totalSlides || 0;
+                statSlides.textContent = total;
+                statTime.textContent = formatElapsed(Date.now() - routeStartTime);
+                if (currentRoute.pic) {
+                    const previewUrl = `${ROUTE_BASE}/${encodeURIComponent(currentRouteId)}/assets/${encodeURIComponent(currentRoute.pic)}`;
+                    finishPreview.style.backgroundImage = `url('${previewUrl}')`;
+                    finishPreview.style.display = 'block';
+                } else {
+                    finishPreview.style.display = 'none';
                 }
-            } catch(e) {}
-        }, 800);
-    }
+                finishOverlay.classList.remove('hidden');
+                launchConfetti();
+            }
 
-    function formatElapsed(ms) {
-        const sec = Math.max(0, Math.round(ms/1000));
-        const m = Math.floor(sec/60);
-        const s = sec % 60;
-        return `${m}:${s.toString().padStart(2,'0')}`;
-    }
+            function stopTracking() {
+                if (progressInterval) {clearInterval(progressInterval); progressInterval = null;}
+            }
 
-    function launchConfetti() {
-        const colors = ['#007aff','#5856d6','#34c759','#ffd60a','#ff9500','#ff2d55'];
-        const overlay = finishOverlay;
-        for (let i = 0; i < 60; i++) {
-            const piece = document.createElement('div');
-            piece.className = 'confetti-piece';
-            piece.style.left = Math.random() * 100 + '%';
-            piece.style.background = colors[Math.floor(Math.random()*colors.length)];
-            piece.style.setProperty('--cx', (Math.random()*200 - 100) + 'px');
-            piece.style.animationDuration = (2.5 + Math.random()*2) + 's';
-            piece.style.animationDelay = (Math.random()*0.4) + 's';
-            overlay.appendChild(piece);
-            setTimeout(() => piece.remove(), 5000);
-        }
-    }
+            function backToMenu() {
+                stopTracking();
+                routeIframe.src = 'about:blank';
+                playerView.classList.remove('active');
+                finishOverlay.classList.add('hidden');
+                selectionView.style.display = 'block';
+                renderCards();
+                currentRouteId = null;
+                currentRoute = null;
+            }
 
-    function showFinishScreen() {
-        if(!currentRoute) return;
-        stopTracking();
-        finishTitle.textContent = currentRoute.name;
-        finishDesc.textContent = currentRoute.desc || 'Поздравляем! Вы успешно прошли маршрут.';
-        const total = currentRoute.totalSlides || 0;
-        statSlides.textContent = total;
-        statTime.textContent = formatElapsed(Date.now() - routeStartTime);
-        if (currentRoute.pic) {
-            const previewUrl = `${ROUTE_BASE}/${encodeURIComponent(currentRouteId)}/assets/${encodeURIComponent(currentRoute.pic)}`;
-            finishPreview.style.backgroundImage = `url('${previewUrl}')`;
-            finishPreview.style.display = 'block';
-        } else {
-            finishPreview.style.display = 'none';
-        }
-        finishOverlay.classList.remove('hidden');
-        launchConfetti();
-    }
-
-    function stopTracking() {
-        if(progressInterval) { clearInterval(progressInterval); progressInterval = null; }
-    }
-
-    function backToMenu() {
-        stopTracking();
-        routeIframe.src = 'about:blank';
-        playerView.classList.remove('active');
-        finishOverlay.classList.add('hidden');
-        selectionView.style.display = 'block';
-        renderCards();
-        currentRouteId = null;
-        currentRoute = null;
-    }
-
-    backBtn.addEventListener('click', backToMenu);
-    finishBackBtn.addEventListener('click', backToMenu);
-    finishReplayBtn.addEventListener('click', () => {
-        if (!currentRouteId) return;
-        const id = currentRouteId;
-        setStoredProgress(id, 0);
-        finishOverlay.classList.add('hidden');
-        startRoute(id);
-    });
-    window.addEventListener('keydown', e => { if(e.key==='Escape' && playerView.classList.contains('active')) backToMenu(); });
-    window.addEventListener('DOMContentLoaded', checkSession);
-})();
-</script>
+            backBtn.addEventListener('click', backToMenu);
+            finishBackBtn.addEventListener('click', backToMenu);
+            finishReplayBtn.addEventListener('click', () => {
+                if (!currentRouteId) return;
+                const id = currentRouteId;
+                setStoredProgress(id, 0);
+                finishOverlay.classList.add('hidden');
+                startRoute(id);
+            });
+            window.addEventListener('keydown', e => {if (e.key === 'Escape' && playerView.classList.contains('active')) backToMenu();});
+            window.addEventListener('DOMContentLoaded', checkSession);
+        })();
+    </script>
 </body>
+
 </html>

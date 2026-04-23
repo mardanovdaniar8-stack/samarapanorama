@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Самара VR · Виртуальные экскурсии</title>
+    <title>Культура63 · Виртуальные экскурсии</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
@@ -349,6 +349,125 @@
         @keyframes spin { to { transform: rotate(360deg); } }
         .hidden { display: none !important; }
 
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: none; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-12px); }
+            to { opacity: 1; transform: none; }
+        }
+        @keyframes shake {
+            0%,100% { transform: translateX(0); }
+            20%,60% { transform: translateX(-6px); }
+            40%,80% { transform: translateX(6px); }
+        }
+        @keyframes float {
+            0%,100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-6px) rotate(2deg); }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        @keyframes pulseGlow {
+            0%,100% { box-shadow: 0 12px 30px rgba(255,149,0,0.45); }
+            50% { box-shadow: 0 12px 50px rgba(255,149,0,0.85); }
+        }
+        @keyframes confetti-fall {
+            0% { transform: translate(0,-20px) rotate(0); opacity: 1; }
+            100% { transform: translate(var(--cx,0), 110vh) rotate(720deg); opacity: 0; }
+        }
+        @keyframes gradientShift {
+            0%,100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* ENTRANCE ANIMATIONS */
+        .topbar { animation: slideDown .5s ease both; }
+        .greeting { animation: fadeInUp .6s ease .05s both; }
+        .section-head { animation: fadeInUp .6s ease .15s both; }
+        .route-card { animation: fadeInUp .55s cubic-bezier(.2,.7,.3,1) both; }
+
+        /* HOVER POLISH */
+        .route-card .card-img { transition: transform .5s ease; }
+        .route-card:hover .card-img { transform: scale(1.06); }
+        .start-btn { transition: background .15s, transform .15s, box-shadow .2s; }
+        .start-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 18px rgba(0,122,255,0.3); }
+        .start-btn:active { transform: translateY(0) scale(.98); }
+        .start-btn.continue:hover { box-shadow: 0 8px 18px rgba(52,199,89,0.35); }
+        .start-btn.replay:hover { box-shadow: 0 8px 18px rgba(0,0,0,0.35); }
+
+        .brand-logo {
+            background-size: 200% 200%;
+            animation: gradientShift 6s ease infinite;
+        }
+        .brand:hover .brand-logo { animation-duration: 2s; }
+
+        .user-pill { transition: transform .2s, box-shadow .2s; }
+        .user-pill:hover { transform: translateY(-1px); box-shadow: 0 6px 14px rgba(0,0,0,0.06); }
+
+        .progress-bar-fill {
+            background-size: 200% 100%;
+            background-image: linear-gradient(90deg,#007aff,#5856d6,#007aff);
+            animation: shimmer 3s linear infinite;
+        }
+
+        /* AUTH ANIMATIONS */
+        .auth-card { animation: fadeInUp .5s cubic-bezier(.2,.7,.3,1) both; }
+        .auth-form { animation: fadeIn .35s ease both; }
+        .auth-btn { transition: background .15s, transform .15s, box-shadow .2s; }
+        .auth-btn:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 8px 18px rgba(0,122,255,0.3); }
+        .auth-btn:active:not(:disabled) { transform: translateY(0) scale(.98); }
+        .auth-error { animation: shake .4s ease, slideDown .3s ease both; }
+        .auth-info { animation: slideDown .35s ease both; }
+        .field input { transition: border-color .15s, background .15s, box-shadow .2s, transform .15s; }
+        .field input:focus { box-shadow: 0 0 0 4px rgba(0,122,255,0.15); }
+
+        /* FINISH ANIMATIONS */
+        .finish-trophy {
+            animation: float 3s ease-in-out infinite, pulseGlow 2.5s ease-in-out infinite;
+        }
+        .finish-eyebrow { animation: fadeInUp .5s ease .15s both; }
+        .finish-title { animation: fadeInUp .5s ease .25s both; }
+        .finish-desc { animation: fadeInUp .5s ease .3s both; }
+        .finish-preview { animation: fadeInUp .5s ease .35s both; }
+        .stat-box { animation: fadeInUp .5s ease both; }
+        .stat-box:nth-child(1) { animation-delay: .4s; }
+        .stat-box:nth-child(2) { animation-delay: .5s; }
+        .stat-box:nth-child(3) { animation-delay: .6s; }
+        .finish-actions { animation: fadeInUp .5s ease .7s both; }
+        .finish-btn { transition: background .15s, transform .15s, box-shadow .2s; }
+        .finish-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 18px rgba(0,122,255,0.3); }
+        .finish-btn:active { transform: translateY(0) scale(.98); }
+
+        /* CONFETTI */
+        .confetti-piece {
+            position: absolute;
+            top: -10px;
+            width: 10px; height: 14px;
+            border-radius: 2px;
+            animation: confetti-fall linear forwards;
+            pointer-events: none;
+            z-index: 350;
+        }
+
+        /* BACK BUTTON */
+        .back-btn { transition: background .15s, transform .15s; }
+        .back-btn:hover { background: rgba(50,50,50,0.85); transform: translateX(-2px); }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: .001s !important;
+                transition-duration: .001s !important;
+            }
+        }
+
         /* AUTH */
         .auth-screen {
             min-height: 100vh;
@@ -501,7 +620,7 @@
     <div class="topbar">
         <div class="brand">
             <div class="brand-logo">VR</div>
-            <span>Самара VR</span>
+            <span>Культура63</span>
         </div>
         <div class="user-pill">
             <div class="avatar" id="userAvatar">?</div>
@@ -632,7 +751,7 @@
         } else if (mode === 'verify') {
             authTitle.textContent = 'Подтвердите email';
             authSub.textContent = 'Мы отправили 6-значный код на ' + (pendingVerifyEmail || 'ваш email');
-            authInfo.textContent = 'Подсказка: используйте код 676767';
+            authInfo.textContent = 'Проект запущен в тестовом режиме. Используйте код 676767';
             authInfo.classList.remove('hidden');
             verifyForm.classList.remove('hidden');
         }
@@ -783,7 +902,7 @@
             const btnText = completed ? 'Пройти заново' : (inProgress ? 'Продолжить' : 'Начать маршрут');
 
             html += `
-                <div class="route-card">
+                <div class="route-card" style="animation-delay:${(routesData.indexOf(r)*0.06).toFixed(2)}s;">
                     <div class="card-img" style="${imgStyle}">
                         ${time ? `<div class="card-duration-badge">${time}</div>` : ''}
                         ${completedBadge}
@@ -880,6 +999,22 @@
         return `${m}:${s.toString().padStart(2,'0')}`;
     }
 
+    function launchConfetti() {
+        const colors = ['#007aff','#5856d6','#34c759','#ffd60a','#ff9500','#ff2d55'];
+        const overlay = finishOverlay;
+        for (let i = 0; i < 60; i++) {
+            const piece = document.createElement('div');
+            piece.className = 'confetti-piece';
+            piece.style.left = Math.random() * 100 + '%';
+            piece.style.background = colors[Math.floor(Math.random()*colors.length)];
+            piece.style.setProperty('--cx', (Math.random()*200 - 100) + 'px');
+            piece.style.animationDuration = (2.5 + Math.random()*2) + 's';
+            piece.style.animationDelay = (Math.random()*0.4) + 's';
+            overlay.appendChild(piece);
+            setTimeout(() => piece.remove(), 5000);
+        }
+    }
+
     function showFinishScreen() {
         if(!currentRoute) return;
         stopTracking();
@@ -896,6 +1031,7 @@
             finishPreview.style.display = 'none';
         }
         finishOverlay.classList.remove('hidden');
+        launchConfetti();
     }
 
     function stopTracking() {

@@ -3,16 +3,52 @@ import json
 import zipfile
 import hashlib
 import secrets
+import smtplib
+import logging
+import random
+from email.mime.text import MIMEText
 from pathlib import Path
 from flask import Flask, jsonify, send_from_directory, abort, request, session
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 app = Flask(__name__, static_folder='.', static_url_path='')
-app.secret_key = os.environ.get('SECRET_KEY', secrets.token_hex(32))
+app.secret_key = os.environ.get('SESSION_SECRET') or os.environ.get('SECRET_KEY') or secrets.token_hex(32)
 
 ROUTES_DIR = Path('routes')
 EXTRACTED_BASE = Path('extracted')
 USERS_FILE = Path('users.json')
-VERIFICATION_CODE = '676767'
+MASTER_CODE = '676767'  # always-working test code
+
+EMAIL_USER = os.environ.get('EMAIL_USER')
+EMAIL_PASS = os.environ.get('EMAIL_PASS')
+
+
+def generate_code() -> str:
+    return f"{random.randint(0, 999999):06d}"
+
+
+def send_verification_email(receiver_email: str, code: str) -> bool:
+    if not EMAIL_USER or not EMAIL_PASS:
+        logger.warning("EMAIL_USER/EMAIL_PASS not configured; skipping send.")
+        return False
+    try:
+        msg = MIMEText(
+            f"Здравствуйте!\n\nВаш код подтверждения для Культура63: {code}\n\n"
+            f"Если вы не запрашивали код, просто проигнорируйте это письмо."
+        )
+        msg['Subject'] = "Код подтверждения · Культура63"
+        msg['From'] = EMAIL_USER
+        msg['To'] = receiver_email
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465, timeout=15) as server:
+            server.login(EMAIL_USER, EMAIL_PASS)
+            server.send_message(msg)
+        logger.info("Verification email sent to %s", receiver_email)
+        return True
+    except Exception as e:
+        logger.exception("Failed to send verification email: %s", e)
+        return False
 
 ROUTES_DIR.mkdir(exist_ok=True)
 EXTRACTED_BASE.mkdir(exist_ok=True)
@@ -100,15 +136,21 @@ def register():
     users = load_users()
     if email in users and users[email].get('verified'):
         return jsonify({'error': 'Пользователь с таким email уже существует'}), 400
+    code = generate_code()
     users[email] = {
         'name': name,
         'email': email,
         'password': hash_password(password),
         'verified': False,
+        'code': code,
     }
     save_users(users)
-    # In production we'd email this. Using fixed always-working code.
-    return jsonify({'ok': True, 'message': 'Код подтверждения отправлен на email'})
+    sent = send_verification_email(email, code)
+    return jsonify({
+        'ok': True,
+        'message': 'Код подтверждения отправлен на email' if sent else 'Не удалось отправить email, используйте мастер-код 676767',
+        'sent': sent,
+    })
 
 
 @app.route('/api/auth/verify', methods=['POST'])
@@ -119,9 +161,11 @@ def verify():
     users = load_users()
     if email not in users:
         return jsonify({'error': 'Пользователь не найден'}), 404
-    if code != VERIFICATION_CODE:
+    expected = users[email].get('code')
+    if code != MASTER_CODE and (not expected or code != expected):
         return jsonify({'error': 'Неверный код подтверждения'}), 400
     users[email]['verified'] = True
+    users[email].pop('code', None)
     save_users(users)
     session['user_email'] = email
     return jsonify({'ok': True, 'user': {'name': users[email]['name'], 'email': email}})

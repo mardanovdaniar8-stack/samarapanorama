@@ -60,19 +60,20 @@
             position: relative;
             width: 44px;
             height: 44px;
-            border-radius: 7px;
+            border-radius: 8px;
             background: #fff url('/static/logo.jpg') center/contain no-repeat;
-            box-shadow: 0 6px 16px rgba(88, 86, 214, 0.25);
+            box-shadow: 0 6px 16px rgba(0, 122, 255, 0.25);
             display: block;
+            cursor: pointer;
         }
 
         .brand-logo::after {
             content: '';
             position: absolute;
             inset: -2px;
-            border-radius: 9px;
-            padding: 1.5px;
-            background: linear-gradient(135deg, #007aff, #5856d6, #ff2d55, #ff9500, #34c759, #007aff);
+            border-radius: 10px;
+            padding: 2px;
+            background: linear-gradient(135deg, #007aff, #ff2d55, #ffffff, #007aff);
             background-size: 300% 300%;
             -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
             -webkit-mask-composite: xor;
@@ -1104,24 +1105,21 @@
 
         .auth-logo {
             position: relative;
-            /* для позиционирования псевдоэлемента */
             width: 72px;
             height: 72px;
-            border-radius: 5px;
+            border-radius: 12px;
             background: #fff url('/static/logo.jpg') center/contain no-repeat;
-            /* убираем старую рамку border: 1px solid #ececf0; */
-            box-shadow: 0 12px 30px rgba(88, 86, 214, 0.25);
+            box-shadow: 0 12px 30px rgba(0, 122, 255, 0.25);
             margin-bottom: 16px;
         }
 
-        /* градиентная рамка через ::after (как у brand-logo) */
         .auth-logo::after {
             content: '';
             position: absolute;
             inset: -2px;
-            border-radius: 7px;
+            border-radius: 14px;
             padding: 2px;
-            background: linear-gradient(135deg, #007aff, #5856d6, #ff2d55, #ff9500, #34c759, #007aff);
+            background: linear-gradient(135deg, #007aff, #ff2d55, #ffffff, #007aff);
             background-size: 300% 300%;
             -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
             -webkit-mask-composite: xor;
@@ -1246,6 +1244,139 @@
             font-weight: 700;
             font-variant-numeric: tabular-nums;
         }
+
+        /* INFO MODAL */
+        .info-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 15, 31, 0.55);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+            animation: fadeIn .25s ease both;
+        }
+
+        .info-modal.hidden { display: none !important; }
+
+        .info-card {
+            background: linear-gradient(180deg, #ffffff, #f8f9fc);
+            border-radius: 24px;
+            padding: 28px 26px 22px;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0, 0, 0, 0.04);
+            position: relative;
+            animation: pop .35s cubic-bezier(.2, .9, .3, 1.2);
+            text-align: center;
+        }
+
+        .info-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: #f0f0f3;
+            color: #6e6e73;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .15s, transform .15s;
+        }
+
+        .info-close:hover { background: #e5e5ea; transform: rotate(90deg); }
+
+        .info-logo {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 14px;
+            border-radius: 14px;
+            background: #fff url('/static/logo.jpg') center/contain no-repeat;
+            position: relative;
+            box-shadow: 0 8px 22px rgba(0, 122, 255, 0.25);
+        }
+
+        .info-logo::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 16px;
+            padding: 2px;
+            background: linear-gradient(135deg, #007aff, #ff2d55, #ffffff, #007aff);
+            background-size: 300% 300%;
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: gradientFlow 6s linear infinite;
+        }
+
+        .info-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            background: linear-gradient(120deg, #007aff, #ff2d55);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .info-sub {
+            color: #6e6e73;
+            font-size: 0.9rem;
+            margin-bottom: 18px;
+        }
+
+        .info-section-title {
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #5856d6;
+            margin: 14px 0 8px;
+        }
+
+        .info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 14px;
+        }
+
+        .info-list li {
+            background: #fff;
+            border: 1px solid #ececf0;
+            border-radius: 12px;
+            padding: 10px 14px;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #1d1d1f;
+            transition: transform .15s, box-shadow .2s, border-color .15s;
+        }
+
+        .info-list li:hover {
+            transform: translateY(-1px);
+            border-color: #007aff;
+            box-shadow: 0 6px 16px rgba(0, 122, 255, 0.12);
+        }
+
+        .info-foot {
+            font-size: 0.82rem;
+            color: #6e6e73;
+            line-height: 1.5;
+            padding-top: 10px;
+            border-top: 1px solid #ececf0;
+            margin-top: 6px;
+        }
+
+        .info-foot strong { color: #1d1d1f; }
     </style>
 </head>
 
@@ -1254,7 +1385,7 @@
     <!-- AUTH -->
     <div id="authScreen" class="auth-screen hidden">
         <div class="auth-card">
-            <div class="auth-logo" aria-label="Культура63"></div>
+            <div class="auth-logo" id="authLogo" role="button" tabindex="0" aria-label="О приложении Культура63" style="cursor:pointer;"></div>
             <div id="authTitle" class="auth-title">Вход</div>
             <div id="authSub" class="auth-sub">Войдите, чтобы продолжить виртуальные экскурсии</div>
             <div id="authError" class="auth-error hidden"></div>
@@ -1310,7 +1441,7 @@
     <div class="app hidden" id="appContainer">
         <div class="topbar">
             <div class="brand">
-                <div class="brand-logo" aria-label="Культура63"></div>
+                <div class="brand-logo" id="brandLogo" role="button" tabindex="0" aria-label="О приложении Культура63"></div>
                 <span>Культура63</span>
             </div>
             <div class="user-pill">
@@ -1386,6 +1517,28 @@
 
     <div id="globalLoader" class="loading-overlay hidden">
         <div class="spinner"></div>
+    </div>
+
+    <!-- INFO MODAL -->
+    <div id="infoModal" class="info-modal hidden" role="dialog" aria-modal="true" aria-labelledby="infoTitle">
+        <div class="info-card">
+            <button class="info-close" id="infoCloseBtn" aria-label="Закрыть">×</button>
+            <div class="info-logo" aria-hidden="true"></div>
+            <div class="info-title" id="infoTitle">Культура63</div>
+            <div class="info-sub">Виртуальные экскурсии</div>
+
+            <div class="info-section-title">Разработчики</div>
+            <ul class="info-list">
+                <li>Марданов Данияр</li>
+                <li>Иван Орлов</li>
+                <li>Васильев Филипп</li>
+            </ul>
+
+            <div class="info-foot">
+                Приложение размещено на хостинге <strong>Replit</strong>.<br>
+                Разработано для <strong>«Хакатон 1.4»</strong>.
+            </div>
+        </div>
     </div>
 
     <script>
@@ -2165,6 +2318,23 @@
                 startRoute(id);
             });
             window.addEventListener('keydown', e => {if (e.key === 'Escape' && playerView.classList.contains('active')) backToMenu();});
+
+            // INFO MODAL
+            const infoModal = document.getElementById('infoModal');
+            const infoCloseBtn = document.getElementById('infoCloseBtn');
+            const brandLogo = document.getElementById('brandLogo');
+            const authLogo = document.getElementById('authLogo');
+            function openInfo() { infoModal.classList.remove('hidden'); }
+            function closeInfo() { infoModal.classList.add('hidden'); }
+            brandLogo && brandLogo.addEventListener('click', openInfo);
+            authLogo && authLogo.addEventListener('click', openInfo);
+            [brandLogo, authLogo].forEach(el => el && el.addEventListener('keydown', e => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openInfo(); }
+            }));
+            infoCloseBtn.addEventListener('click', closeInfo);
+            infoModal.addEventListener('click', e => { if (e.target === infoModal) closeInfo(); });
+            window.addEventListener('keydown', e => { if (e.key === 'Escape' && !infoModal.classList.contains('hidden')) closeInfo(); });
+
             window.addEventListener('DOMContentLoaded', checkSession);
         })();
     </script>

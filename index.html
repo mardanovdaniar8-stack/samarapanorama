@@ -1059,13 +1059,32 @@
         }
 
         .auth-logo {
+            position: relative;
+            /* для позиционирования псевдоэлемента */
             width: 72px;
             height: 72px;
             border-radius: 5px;
             background: #fff url('/static/logo.jpg') center/contain no-repeat;
-            border: 1px solid #ececf0;
+            /* убираем старую рамку border: 1px solid #ececf0; */
             box-shadow: 0 12px 30px rgba(88, 86, 214, 0.25);
             margin-bottom: 16px;
+        }
+
+        /* градиентная рамка через ::after (как у brand-logo) */
+        .auth-logo::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            /* рамка немного выходит за пределы */
+            border-radius: 7px;
+            /* чуть больше, чем у родителя (5px + 2px), чтобы скругления совпали */
+            padding: 2px;
+            /* толщина градиента */
+            background: linear-gradient(135deg, #007aff, #5856d6 55%, #ff2d55);
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-ma: xor;
+            mask-composite: exclude;
+            pointer-events: none;
         }
 
         .auth-title {
@@ -1757,7 +1776,8 @@
                 .quiz-option::before {
                     content: counter(quizopt, upper-alpha);
                     flex: 0 0 54px;
-                    height: 54px;
+                    height: 44px;
+                    width: 44px;
                     display: inline-flex;
                     align-items: center;
                     justify-content: center;

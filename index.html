@@ -19,12 +19,52 @@
             flex-direction: column;
         }
         .app {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 2rem 1.5rem;
+            padding: 2rem 1.5rem 4rem;
             width: 100%;
             flex: 1;
         }
+
+        /* HEADER */
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+        .brand {
+            display: flex; align-items: center; gap: 10px;
+            font-weight: 700; font-size: 1.1rem;
+        }
+        .brand-logo {
+            width: 36px; height: 36px;
+            border-radius: 10px;
+            background: linear-gradient(135deg,#007aff,#5856d6);
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-weight: 800; font-size: 1.1rem;
+        }
+        .user-pill {
+            display: flex; align-items: center; gap: 10px;
+            background: #fff; padding: 6px 8px 6px 14px;
+            border-radius: 100px; border: 1px solid #e8e8ed;
+        }
+        .user-pill .avatar {
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg,#007aff,#34c759);
+            color: white; font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.85rem;
+        }
+        .logout-btn {
+            background: none; border: none;
+            color: #6e6e73; cursor: pointer;
+            font-size: 0.85rem; padding: 4px 10px;
+            border-radius: 100px;
+        }
+        .logout-btn:hover { background: #f0f0f3; color: #1d1d1f; }
+
         .selection-view { display: block; }
         .player-view {
             display: none;
@@ -33,43 +73,83 @@
             background: #000; z-index: 100;
         }
         .player-view.active { display: block; }
+
         .greeting { margin-bottom: 2rem; }
-        .greeting h1 { font-size: 2.2rem; font-weight: 700; }
+        .greeting h1 { font-size: 2.4rem; font-weight: 700; }
         .greeting .user-name { color: #007aff; }
-        .greeting p { font-size: 1.2rem; color: #6e6e73; margin-top: 0.3rem; }
-        .section-title { font-size: 1.6rem; font-weight: 600; margin-bottom: 1.5rem; }
+        .greeting p { font-size: 1.15rem; color: #6e6e73; margin-top: 0.4rem; }
+
+        .section-head {
+            display: flex; align-items: baseline; justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+        .section-title { font-size: 1.6rem; font-weight: 600; }
+        .section-count { color: #86868b; font-size: 0.95rem; }
+
         .routes-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 1.5rem;
         }
         .route-card {
             background: #fff;
             border-radius: 24px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
             overflow: hidden;
-            display: flex;
-            height: 200px;              /* было 180px → больше места для описания */
-            border: 1px solid #e8e8ed;
-            transition: transform 0.2s;
+            display: flex; flex-direction: column;
+            border: 1px solid #ececf0;
+            transition: transform .25s ease, box-shadow .25s ease;
+            position: relative;
         }
-        .route-card:hover { transform: translateY(-2px); }
+        .route-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+        }
         .card-img {
-            width: 33.333%;
-            background-color: #f0f0f3;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background-color: #e6e6ea;
             background-size: cover;
             background-position: center;
+            position: relative;
+        }
+        .card-img::after {
+            content: "";
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(0,0,0,0.55));
+        }
+        .card-duration-badge {
+            position: absolute;
+            top: 12px; left: 12px;
+            background: rgba(0,0,0,0.55);
+            color: white;
+            padding: 5px 11px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            border-radius: 100px;
+            backdrop-filter: blur(8px);
+            z-index: 2;
+        }
+        .card-completed-badge {
+            position: absolute;
+            top: 12px; right: 12px;
+            background: #34c759;
+            color: white;
+            padding: 5px 11px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            border-radius: 100px;
+            z-index: 2;
         }
         .card-content {
-            width: 66.666%;
-            padding: 1rem 1rem;        /* уменьшил паддинг, чтобы выиграть место */
-            display: flex;
-            flex-direction: column;
+            padding: 1.1rem 1.2rem 1.2rem;
+            display: flex; flex-direction: column;
+            flex: 1;
         }
         .card-title {
             font-weight: 700;
-            font-size: 1.2rem;         /* чуть меньше, чтобы освободить пространство */
-            margin-bottom: 0.2rem;
+            font-size: 1.15rem;
+            margin-bottom: 0.4rem;
             line-height: 1.3;
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -77,62 +157,63 @@
             overflow: hidden;
         }
         .card-desc {
-            font-size: 0.8rem;
+            font-size: 0.88rem;
             color: #6e6e73;
-            margin-bottom: 0.4rem;
-            /* гарантируем хотя бы одну строку */
-            min-height: 1.6em;
+            margin-bottom: 0.9rem;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
             flex: 1;
-        }
-        .card-duration {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #1d1d1f;
-            margin-bottom: 0.5rem;
+            min-height: 2.4em;
         }
         .progress-wrapper {
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-bottom: 0.5rem;
+            gap: 10px;
+            margin-bottom: 0.9rem;
         }
         .progress-bar-bg {
             flex: 1;
-            height: 5px;
+            height: 6px;
             background: #e8e8ed;
             border-radius: 100px;
+            overflow: hidden;
         }
         .progress-bar-fill {
             height: 100%;
             width: 0%;
-            background: #007aff;
+            background: linear-gradient(90deg,#007aff,#5856d6);
             border-radius: 100px;
+            transition: width .4s ease;
         }
         .progress-text {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: #6e6e73;
-            min-width: 38px;
+            min-width: 42px;
             text-align: right;
+            font-variant-numeric: tabular-nums;
         }
         .start-btn {
             background: #007aff;
             color: white;
             border: none;
             border-radius: 30px;
-            padding: 8px 0;
+            padding: 11px 0;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.95rem;
             cursor: pointer;
             width: 100%;
             margin-top: auto;
+            transition: background .15s;
         }
         .start-btn:hover { background: #005bbf; }
+        .start-btn.continue { background: #34c759; }
+        .start-btn.continue:hover { background: #248a3d; }
+        .start-btn.replay { background: #1d1d1f; }
+        .start-btn.replay:hover { background: #000; }
 
-        /* плеер */
+        /* PLAYER */
         .player-header {
             position: absolute;
             top: 20px; left: 20px;
@@ -156,53 +237,91 @@
             border: none; display: block;
         }
 
-        /* финальный слайд */
+        /* FINISH */
         .finish-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
-            backdrop-filter: blur(12px);
+            background: radial-gradient(ellipse at top, rgba(0,122,255,0.25), rgba(0,0,0,0.92) 70%);
+            backdrop-filter: blur(16px);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 300;
+            padding: 20px;
+            overflow-y: auto;
         }
         .finish-card {
-            background: #1c1c1e;
+            background: linear-gradient(180deg,#1c1c1e,#0f0f10);
             border-radius: 32px;
-            padding: 40px;
-            max-width: 500px;
-            width: 90%;
+            padding: 40px 36px 32px;
+            max-width: 560px;
+            width: 100%;
             text-align: center;
             color: white;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            border: 1px solid #3a3a3c;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06);
+            position: relative;
+            animation: pop .4s cubic-bezier(.2,.9,.3,1.2);
         }
-        .finish-icon { font-size: 64px; margin-bottom: 20px; }
+        @keyframes pop { from { opacity:0; transform: scale(.9) translateY(20px); } to { opacity:1; transform:none; } }
+        .finish-trophy {
+            width: 92px; height: 92px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            background: linear-gradient(135deg,#ffd60a,#ff9500);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 48px;
+            box-shadow: 0 12px 30px rgba(255,149,0,0.45);
+        }
+        .finish-eyebrow {
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-size: 0.75rem;
+            color: #34c759;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .finish-title { font-size: 1.7rem; font-weight: 700; margin-bottom: 6px; line-height: 1.2; }
+        .finish-desc { font-size: 0.95rem; color: #98989e; margin-bottom: 22px; }
         .finish-preview {
             width: 100%;
-            height: 160px;
+            aspect-ratio: 16 / 9;
             background-size: cover;
             background-position: center;
             border-radius: 20px;
-            margin-bottom: 24px;
+            margin-bottom: 22px;
             background-color: #2c2c2e;
+            border: 1px solid rgba(255,255,255,0.06);
         }
-        .finish-title { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
-        .finish-desc { font-size: 16px; color: #98989e; margin-bottom: 24px; }
-        .finish-progress { margin-bottom: 30px; }
-        .finish-progress .progress-bar-bg { background: #3a3a3c; margin-bottom: 8px; }
-        .finish-progress .progress-text { color: #fff; font-size: 1rem; }
+        .finish-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+        .stat-box {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 14px 8px;
+        }
+        .stat-value { font-size: 1.4rem; font-weight: 700; color: #fff; }
+        .stat-label { font-size: 0.72rem; color: #98989e; margin-top: 2px; text-transform: uppercase; letter-spacing: .08em; }
+        .finish-actions { display: flex; gap: 10px; }
         .finish-btn {
+            flex: 1;
             background: #007aff;
             border: none;
             color: white;
             font-weight: 600;
-            padding: 16px 32px;
+            padding: 14px 18px;
             border-radius: 40px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             cursor: pointer;
-            width: 100%;
+        }
+        .finish-btn.secondary {
+            background: rgba(255,255,255,0.08);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.12);
         }
 
         .empty-message {
@@ -214,13 +333,10 @@
             color: #86868b;
         }
         .loading-overlay {
-            position: fixed;
-            inset: 0;
+            position: fixed; inset: 0;
             background: rgba(255,255,255,0.7);
             backdrop-filter: blur(4px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             z-index: 999;
         }
         .spinner {
@@ -232,17 +348,177 @@
         }
         @keyframes spin { to { transform: rotate(360deg); } }
         .hidden { display: none !important; }
+
+        /* AUTH */
+        .auth-screen {
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            padding: 20px;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(0,122,255,0.18), transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(88,86,214,0.18), transparent 50%),
+                #f5f5f7;
+        }
+        .auth-card {
+            background: white;
+            padding: 36px 32px;
+            border-radius: 28px;
+            width: 100%;
+            max-width: 420px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+            border: 1px solid #ececf0;
+        }
+        .auth-logo {
+            width: 56px; height: 56px;
+            border-radius: 16px;
+            background: linear-gradient(135deg,#007aff,#5856d6);
+            color: white; font-weight: 800; font-size: 1.5rem;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 16px;
+        }
+        .auth-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 4px; }
+        .auth-sub { color: #6e6e73; font-size: 0.95rem; margin-bottom: 22px; }
+        .field { margin-bottom: 14px; }
+        .field label {
+            display: block; font-size: 0.8rem; font-weight: 600;
+            color: #1d1d1f; margin-bottom: 6px;
+        }
+        .field input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d2d2d7;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            background: #fafafc;
+            transition: border-color .15s, background .15s;
+        }
+        .field input:focus {
+            outline: none;
+            border-color: #007aff;
+            background: white;
+        }
+        .auth-btn {
+            width: 100%;
+            background: #007aff;
+            color: white; border: none;
+            padding: 13px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.98rem;
+            cursor: pointer;
+            margin-top: 6px;
+        }
+        .auth-btn:hover { background: #005bbf; }
+        .auth-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .auth-switch {
+            text-align: center; margin-top: 16px;
+            font-size: 0.9rem; color: #6e6e73;
+        }
+        .auth-switch a { color: #007aff; cursor: pointer; font-weight: 600; }
+        .auth-error {
+            background: #ffefef;
+            color: #c92a2a;
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            margin-bottom: 14px;
+        }
+        .auth-info {
+            background: #eaf4ff;
+            color: #0058c8;
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            margin-bottom: 14px;
+        }
+        .code-input {
+            text-align: center;
+            letter-spacing: 0.5em;
+            font-size: 1.4rem !important;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+        }
     </style>
 </head>
 <body>
 
-<div class="app" id="appContainer">
+<!-- AUTH -->
+<div id="authScreen" class="auth-screen hidden">
+    <div class="auth-card">
+        <div class="auth-logo">VR</div>
+        <div id="authTitle" class="auth-title">Вход</div>
+        <div id="authSub" class="auth-sub">Войдите, чтобы продолжить виртуальные экскурсии</div>
+        <div id="authError" class="auth-error hidden"></div>
+        <div id="authInfo" class="auth-info hidden"></div>
+
+        <!-- LOGIN -->
+        <form id="loginForm" class="auth-form">
+            <div class="field">
+                <label>Email</label>
+                <input type="email" id="loginEmail" autocomplete="email" required>
+            </div>
+            <div class="field">
+                <label>Пароль</label>
+                <input type="password" id="loginPassword" autocomplete="current-password" required>
+            </div>
+            <button type="submit" class="auth-btn">Войти</button>
+            <div class="auth-switch">Нет аккаунта? <a id="goToSignup">Создать</a></div>
+        </form>
+
+        <!-- SIGNUP -->
+        <form id="signupForm" class="auth-form hidden">
+            <div class="field">
+                <label>Имя</label>
+                <input type="text" id="signupName" autocomplete="name" required>
+            </div>
+            <div class="field">
+                <label>Email</label>
+                <input type="email" id="signupEmail" autocomplete="email" required>
+            </div>
+            <div class="field">
+                <label>Пароль</label>
+                <input type="password" id="signupPassword" autocomplete="new-password" minlength="4" required>
+            </div>
+            <button type="submit" class="auth-btn">Создать аккаунт</button>
+            <div class="auth-switch">Уже есть аккаунт? <a id="goToLogin">Войти</a></div>
+        </form>
+
+        <!-- VERIFY -->
+        <form id="verifyForm" class="auth-form hidden">
+            <div class="field">
+                <label>Код подтверждения (6 цифр)</label>
+                <input type="text" id="verifyCode" maxlength="6" inputmode="numeric" pattern="[0-9]{6}" class="code-input" required>
+            </div>
+            <button type="submit" class="auth-btn">Подтвердить</button>
+            <div class="auth-switch"><a id="backFromVerify">Назад</a></div>
+        </form>
+    </div>
+</div>
+
+<!-- MAIN APP -->
+<div class="app hidden" id="appContainer">
+    <div class="topbar">
+        <div class="brand">
+            <div class="brand-logo">VR</div>
+            <span>Самара VR</span>
+        </div>
+        <div class="user-pill">
+            <div class="avatar" id="userAvatar">?</div>
+            <span id="userPillName" style="font-weight:600;font-size:0.9rem;">Гость</span>
+            <button class="logout-btn" id="logoutBtn">Выйти</button>
+        </div>
+    </div>
+
     <div id="selectionView" class="selection-view">
         <div class="greeting">
             <h1>Привет, <span class="user-name" id="userNameDisplay">Гость</span>!</h1>
             <p>Давайте проведем виртуальную экскурсию.</p>
         </div>
-        <h2 class="section-title">Выберите маршрут</h2>
+        <div class="section-head">
+            <h2 class="section-title">Выберите маршрут</h2>
+            <span class="section-count" id="routeCount"></span>
+        </div>
         <div id="routesContainer" class="routes-grid">
             <div class="empty-message">Загрузка маршрутов...</div>
         </div>
@@ -257,17 +533,29 @@
 
     <div id="finishOverlay" class="finish-overlay hidden">
         <div class="finish-card">
-            <div class="finish-icon">🏁</div>
-            <div id="finishPreview" class="finish-preview"></div>
+            <div class="finish-trophy">🏆</div>
+            <div class="finish-eyebrow">Маршрут завершён</div>
             <div id="finishTitle" class="finish-title"></div>
             <div id="finishDesc" class="finish-desc"></div>
-            <div class="finish-progress">
-                <div class="progress-bar-bg">
-                    <div id="finishProgressFill" class="progress-bar-fill" style="width:100%"></div>
+            <div id="finishPreview" class="finish-preview"></div>
+            <div class="finish-stats">
+                <div class="stat-box">
+                    <div class="stat-value" id="statSlides">0</div>
+                    <div class="stat-label">Слайдов</div>
                 </div>
-                <div class="progress-text" id="finishProgressText"></div>
+                <div class="stat-box">
+                    <div class="stat-value" id="statTime">—</div>
+                    <div class="stat-label">Время</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value">100%</div>
+                    <div class="stat-label">Прогресс</div>
+                </div>
             </div>
-            <button class="finish-btn" id="finishBackBtn">Вернуться в меню</button>
+            <div class="finish-actions">
+                <button class="finish-btn secondary" id="finishReplayBtn">↻ Заново</button>
+                <button class="finish-btn" id="finishBackBtn">В меню →</button>
+            </div>
         </div>
     </div>
 </div>
@@ -277,186 +565,366 @@
 </div>
 
 <script>
-    (function(){
-        const API_BASE = '/api';
-        const ROUTE_BASE = '/route';
-        let routesData = [];
-        let currentRouteId = null;
-        let currentRoute = null;
-        let progressInterval = null;
+(function(){
+    const API_BASE = '/api';
+    const ROUTE_BASE = '/route';
+    let routesData = [];
+    let currentRouteId = null;
+    let currentRoute = null;
+    let progressInterval = null;
+    let currentUser = null;
 
-        const selectionView = document.getElementById('selectionView');
-        const playerView = document.getElementById('playerView');
-        const routesContainer = document.getElementById('routesContainer');
-        const routeIframe = document.getElementById('routeIframe');
-        const backBtn = document.getElementById('backToMenuBtn');
-        const finishOverlay = document.getElementById('finishOverlay');
-        const finishBackBtn = document.getElementById('finishBackBtn');
-        const globalLoader = document.getElementById('globalLoader');
-        const userNameSpan = document.getElementById('userNameDisplay');
+    // Elements
+    const authScreen = document.getElementById('authScreen');
+    const appContainer = document.getElementById('appContainer');
+    const selectionView = document.getElementById('selectionView');
+    const playerView = document.getElementById('playerView');
+    const routesContainer = document.getElementById('routesContainer');
+    const routeCount = document.getElementById('routeCount');
+    const routeIframe = document.getElementById('routeIframe');
+    const backBtn = document.getElementById('backToMenuBtn');
+    const finishOverlay = document.getElementById('finishOverlay');
+    const finishBackBtn = document.getElementById('finishBackBtn');
+    const finishReplayBtn = document.getElementById('finishReplayBtn');
+    const globalLoader = document.getElementById('globalLoader');
+    const userNameSpan = document.getElementById('userNameDisplay');
+    const userPillName = document.getElementById('userPillName');
+    const userAvatar = document.getElementById('userAvatar');
+    const logoutBtn = document.getElementById('logoutBtn');
 
-        const finishPreview = document.getElementById('finishPreview');
-        const finishTitle = document.getElementById('finishTitle');
-        const finishDesc = document.getElementById('finishDesc');
-        const finishProgressText = document.getElementById('finishProgressText');
+    const finishPreview = document.getElementById('finishPreview');
+    const finishTitle = document.getElementById('finishTitle');
+    const finishDesc = document.getElementById('finishDesc');
+    const statSlides = document.getElementById('statSlides');
+    const statTime = document.getElementById('statTime');
 
-        const USER_NAME = 'Исследователь';
-        userNameSpan.textContent = USER_NAME;
+    // Auth
+    const authError = document.getElementById('authError');
+    const authInfo = document.getElementById('authInfo');
+    const authTitle = document.getElementById('authTitle');
+    const authSub = document.getElementById('authSub');
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    const verifyForm = document.getElementById('verifyForm');
+    let pendingVerifyEmail = null;
 
-        function showLoader(s) { globalLoader.classList.toggle('hidden', !s); }
+    function showLoader(s) { globalLoader.classList.toggle('hidden', !s); }
+    function escapeHtml(t) { const d=document.createElement('div'); d.textContent=t||''; return d.innerHTML; }
 
-        function getStoredProgress(id) {
-            const v = localStorage.getItem(`route_progress_${id}`);
-            return v ? parseInt(v,10) : 0;
+    // ---- AUTH UI ----
+    function showAuth() { authScreen.classList.remove('hidden'); appContainer.classList.add('hidden'); }
+    function showApp() { authScreen.classList.add('hidden'); appContainer.classList.remove('hidden'); }
+
+    function setAuthMode(mode) {
+        authError.classList.add('hidden');
+        authInfo.classList.add('hidden');
+        loginForm.classList.add('hidden');
+        signupForm.classList.add('hidden');
+        verifyForm.classList.add('hidden');
+        if (mode === 'login') {
+            authTitle.textContent = 'Вход';
+            authSub.textContent = 'Войдите, чтобы продолжить виртуальные экскурсии';
+            loginForm.classList.remove('hidden');
+        } else if (mode === 'signup') {
+            authTitle.textContent = 'Регистрация';
+            authSub.textContent = 'Создайте аккаунт за 30 секунд';
+            signupForm.classList.remove('hidden');
+        } else if (mode === 'verify') {
+            authTitle.textContent = 'Подтвердите email';
+            authSub.textContent = 'Мы отправили 6-значный код на ' + (pendingVerifyEmail || 'ваш email');
+            authInfo.textContent = 'Подсказка: используйте код 676767';
+            authInfo.classList.remove('hidden');
+            verifyForm.classList.remove('hidden');
         }
-        function setStoredProgress(id, val) {
-            localStorage.setItem(`route_progress_${id}`, val);
-        }
-        function calcPercent(c, t) { return t ? Math.min(100, Math.round((c/t)*100)) : 0; }
+    }
+    function showError(msg) { authError.textContent = msg; authError.classList.remove('hidden'); }
 
-        async function fetchRoutes() {
-            showLoader(true);
-            try {
-                const res = await fetch(`${API_BASE}/routes`);
-                const data = await res.json();
-                routesData = data.routes || [];
-                renderCards();
-            } catch(e) {
-                routesContainer.innerHTML = `<div class="empty-message">⚠️ Ошибка загрузки</div>`;
-            } finally { showLoader(false); }
-        }
+    document.getElementById('goToSignup').addEventListener('click', () => setAuthMode('signup'));
+    document.getElementById('goToLogin').addEventListener('click', () => setAuthMode('login'));
+    document.getElementById('backFromVerify').addEventListener('click', () => setAuthMode('login'));
 
-        function renderCards() {
-            if(!routesData.length) {
-                routesContainer.innerHTML = `<div class="empty-message">Маршруты не найдены.<br>Добавьте .irf в папку routes/</div>`;
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        authError.classList.add('hidden');
+        const email = document.getElementById('loginEmail').value.trim();
+        const password = document.getElementById('loginPassword').value;
+        try {
+            const res = await fetch(`${API_BASE}/auth/login`, {
+                method: 'POST', headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({ email, password })
+            });
+            const data = await res.json();
+            if (!res.ok) {
+                if (data.needsVerification) {
+                    pendingVerifyEmail = email;
+                    setAuthMode('verify');
+                    return;
+                }
+                showError(data.error || 'Ошибка входа');
                 return;
             }
-            let html = '';
-            routesData.forEach(r => {
-                const comp = getStoredProgress(r.id);
-                const perc = calcPercent(comp, r.totalSlides||0);
-                // Картинка-превью
-                let imgStyle = '';
-                if (r.pic) {
-                    const imgUrl = `${ROUTE_BASE}/${encodeURIComponent(r.id)}/assets/${encodeURIComponent(r.pic)}`;
-                    imgStyle = `background-image: url('${imgUrl}');`;
-                }
-                // Если описание пустое — покажем placeholder
-                const desc = r.desc ? escapeHtml(r.desc) : 'Описание скоро появится';
-                html += `
-                    <div class="route-card">
-                        <div class="card-img" style="${imgStyle} background-size: cover; background-position: center;"></div>
-                        <div class="card-content">
-                            <div class="card-title">${escapeHtml(r.name)}</div>
-                            <div class="card-desc">${desc}</div>
-                            <div class="card-duration">⏱ ${escapeHtml(r.time)}</div>
-                            <div class="progress-wrapper">
-                                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:${perc}%;"></div></div>
-                                <span class="progress-text">${comp}/${r.totalSlides||0}</span>
-                            </div>
-                            <button class="start-btn" data-id="${r.id}">Начать маршрут</button>
-                        </div>
-                    </div>`;
+            currentUser = data.user;
+            enterApp();
+        } catch (err) { showError('Ошибка соединения'); }
+    });
+
+    signupForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        authError.classList.add('hidden');
+        const name = document.getElementById('signupName').value.trim();
+        const email = document.getElementById('signupEmail').value.trim();
+        const password = document.getElementById('signupPassword').value;
+        try {
+            const res = await fetch(`${API_BASE}/auth/register`, {
+                method: 'POST', headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({ name, email, password })
             });
-            routesContainer.innerHTML = html;
-            document.querySelectorAll('.start-btn').forEach(b => b.addEventListener('click', ()=> startRoute(b.dataset.id)));
-        }
+            const data = await res.json();
+            if (!res.ok) { showError(data.error || 'Ошибка регистрации'); return; }
+            pendingVerifyEmail = email;
+            setAuthMode('verify');
+        } catch (err) { showError('Ошибка соединения'); }
+    });
 
-        function escapeHtml(t) { const d=document.createElement('div'); d.textContent=t||''; return d.innerHTML; }
+    verifyForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        authError.classList.add('hidden');
+        const code = document.getElementById('verifyCode').value.trim();
+        try {
+            const res = await fetch(`${API_BASE}/auth/verify`, {
+                method: 'POST', headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({ email: pendingVerifyEmail, code })
+            });
+            const data = await res.json();
+            if (!res.ok) { showError(data.error || 'Неверный код'); return; }
+            currentUser = data.user;
+            enterApp();
+        } catch (err) { showError('Ошибка соединения'); }
+    });
 
-        function startRoute(routeId) {
-            const route = routesData.find(r=>r.id===routeId);
-            if(!route) return;
-            currentRouteId = routeId;
-            currentRoute = route;
-            selectionView.style.display = 'none';
-            playerView.classList.add('active');
-            finishOverlay.classList.add('hidden');
-            routeIframe.src = `${ROUTE_BASE}/${encodeURIComponent(routeId)}/index.html`;
-            showLoader(true);
-            routeIframe.onload = () => {
-                showLoader(false);
-                injectCounterStyle();
-                startProgressTracking();
-            };
-            routeIframe.onerror = () => { showLoader(false); alert('Ошибка загрузки маршрута'); };
-        }
+    logoutBtn.addEventListener('click', async () => {
+        await fetch(`${API_BASE}/auth/logout`, { method: 'POST' });
+        currentUser = null;
+        showAuth();
+        setAuthMode('login');
+    });
 
-        function injectCounterStyle() {
-            try {
-                const doc = routeIframe.contentDocument || routeIframe.contentWindow.document;
-                if(!doc) return;
-                const style = doc.createElement('style');
-                style.textContent = `
-                    #progress-counter {
-                        bottom: auto !important;
-                        top: 20px !important;
-                        right: 20px !important;
-                        background: rgba(0,0,0,0.5) !important;
-                        backdrop-filter: blur(4px) !important;
-                        color: white !important;
-                        z-index: 150 !important;
-                    }
-                `;
-                doc.head.appendChild(style);
-            } catch(e) {}
-        }
+    function enterApp() {
+        if (!currentUser) return;
+        userNameSpan.textContent = currentUser.name;
+        userPillName.textContent = currentUser.name;
+        userAvatar.textContent = (currentUser.name || '?').charAt(0).toUpperCase();
+        showApp();
+        fetchRoutes();
+    }
 
-        function startProgressTracking() {
-            if(progressInterval) clearInterval(progressInterval);
-            progressInterval = setInterval(() => {
-                try {
-                    const win = routeIframe.contentWindow;
-                    if(!win) return;
-                    const completed = win.COMPLETED;
-                    const total = win.totalSlides;
-                    if(typeof completed !== 'undefined' && typeof total !== 'undefined') {
-                        setStoredProgress(currentRouteId, completed);
-                        if(completed >= total && total > 0) {
-                            showFinishScreen();
-                        }
-                    }
-                } catch(e) {}
-            }, 800);
-        }
-
-        function showFinishScreen() {
-            if(!currentRoute) return;
-            stopTracking();
-            finishTitle.textContent = currentRoute.name;
-            finishDesc.textContent = currentRoute.desc || '';
-            const comp = getStoredProgress(currentRouteId);
-            const total = currentRoute.totalSlides || 0;
-            finishProgressText.textContent = `${comp}/${total} · 100%`;
-            if (currentRoute.pic) {
-                const previewUrl = `${ROUTE_BASE}/${encodeURIComponent(currentRouteId)}/assets/${encodeURIComponent(currentRoute.pic)}`;
-                finishPreview.style.backgroundImage = `url('${previewUrl}')`;
+    async function checkSession() {
+        try {
+            const res = await fetch(`${API_BASE}/auth/me`);
+            const data = await res.json();
+            if (data.user) {
+                currentUser = data.user;
+                enterApp();
             } else {
-                finishPreview.style.backgroundImage = 'none';
+                showAuth();
+                setAuthMode('login');
             }
-            finishOverlay.classList.remove('hidden');
+        } catch {
+            showAuth(); setAuthMode('login');
         }
+    }
 
-        function stopTracking() {
-            if(progressInterval) { clearInterval(progressInterval); progressInterval = null; }
-        }
+    // ---- ROUTES ----
+    function getStoredProgress(id) {
+        const v = localStorage.getItem(`route_progress_${id}`);
+        return v ? parseInt(v,10) : 0;
+    }
+    function setStoredProgress(id, val) {
+        localStorage.setItem(`route_progress_${id}`, val);
+    }
+    function calcPercent(c, t) { return t ? Math.min(100, Math.round((c/t)*100)) : 0; }
 
-        function backToMenu() {
-            stopTracking();
-            routeIframe.src = 'about:blank';
-            playerView.classList.remove('active');
-            finishOverlay.classList.add('hidden');
-            selectionView.style.display = 'block';
+    async function fetchRoutes() {
+        showLoader(true);
+        try {
+            const res = await fetch(`${API_BASE}/routes`);
+            const data = await res.json();
+            routesData = data.routes || [];
             renderCards();
-            currentRouteId = null;
-            currentRoute = null;
-        }
+        } catch(e) {
+            routesContainer.innerHTML = `<div class="empty-message">⚠️ Ошибка загрузки</div>`;
+        } finally { showLoader(false); }
+    }
 
-        backBtn.addEventListener('click', backToMenu);
-        finishBackBtn.addEventListener('click', backToMenu);
-        window.addEventListener('keydown', e => { if(e.key==='Escape' && playerView.classList.contains('active')) backToMenu(); });
-        window.addEventListener('DOMContentLoaded', fetchRoutes);
-    })();
+    function renderCards() {
+        if(!routesData.length) {
+            routeCount.textContent = '';
+            routesContainer.innerHTML = `<div class="empty-message">Маршруты не найдены.<br>Добавьте .irf в папку routes/</div>`;
+            return;
+        }
+        routeCount.textContent = `${routesData.length} ${pluralize(routesData.length, 'маршрут','маршрута','маршрутов')}`;
+        let html = '';
+        routesData.forEach(r => {
+            const comp = getStoredProgress(r.id);
+            const total = r.totalSlides || 0;
+            const perc = calcPercent(comp, total);
+            const completed = total > 0 && comp >= total;
+            const inProgress = comp > 0 && !completed;
+
+            let imgStyle = '';
+            if (r.pic) {
+                const imgUrl = `${ROUTE_BASE}/${encodeURIComponent(r.id)}/assets/${encodeURIComponent(r.pic)}`;
+                imgStyle = `background-image: url('${imgUrl}');`;
+            }
+            const desc = r.desc ? escapeHtml(r.desc) : 'Описание скоро появится';
+            const time = r.time ? `⏱ ${escapeHtml(r.time)}` : '';
+            const completedBadge = completed ? `<div class="card-completed-badge">✓ Пройден</div>` : '';
+            const btnClass = completed ? 'replay' : (inProgress ? 'continue' : '');
+            const btnText = completed ? 'Пройти заново' : (inProgress ? 'Продолжить' : 'Начать маршрут');
+
+            html += `
+                <div class="route-card">
+                    <div class="card-img" style="${imgStyle}">
+                        ${time ? `<div class="card-duration-badge">${time}</div>` : ''}
+                        ${completedBadge}
+                    </div>
+                    <div class="card-content">
+                        <div class="card-title">${escapeHtml(r.name)}</div>
+                        <div class="card-desc">${desc}</div>
+                        <div class="progress-wrapper">
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:${perc}%;"></div></div>
+                            <span class="progress-text">${comp}/${total}</span>
+                        </div>
+                        <button class="start-btn ${btnClass}" data-id="${r.id}">${btnText}</button>
+                    </div>
+                </div>`;
+        });
+        routesContainer.innerHTML = html;
+        document.querySelectorAll('.start-btn').forEach(b => b.addEventListener('click', ()=> startRoute(b.dataset.id)));
+    }
+
+    function pluralize(n, one, few, many) {
+        const mod10 = n % 10, mod100 = n % 100;
+        if (mod10 === 1 && mod100 !== 11) return one;
+        if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return few;
+        return many;
+    }
+
+    let routeStartTime = 0;
+
+    function startRoute(routeId) {
+        const route = routesData.find(r=>r.id===routeId);
+        if(!route) return;
+        currentRouteId = routeId;
+        currentRoute = route;
+        routeStartTime = Date.now();
+        // reset progress if replaying after completion
+        if (getStoredProgress(routeId) >= (route.totalSlides || 0) && (route.totalSlides||0) > 0) {
+            setStoredProgress(routeId, 0);
+        }
+        selectionView.style.display = 'none';
+        playerView.classList.add('active');
+        finishOverlay.classList.add('hidden');
+        routeIframe.src = `${ROUTE_BASE}/${encodeURIComponent(routeId)}/index.html`;
+        showLoader(true);
+        routeIframe.onload = () => {
+            showLoader(false);
+            injectCounterStyle();
+            startProgressTracking();
+        };
+        routeIframe.onerror = () => { showLoader(false); alert('Ошибка загрузки маршрута'); };
+    }
+
+    function injectCounterStyle() {
+        try {
+            const doc = routeIframe.contentDocument || routeIframe.contentWindow.document;
+            if(!doc) return;
+            const style = doc.createElement('style');
+            style.textContent = `
+                #progress-counter {
+                    bottom: auto !important;
+                    top: 20px !important;
+                    right: 20px !important;
+                    background: rgba(0,0,0,0.5) !important;
+                    backdrop-filter: blur(4px) !important;
+                    color: white !important;
+                    z-index: 150 !important;
+                }
+            `;
+            doc.head.appendChild(style);
+        } catch(e) {}
+    }
+
+    function startProgressTracking() {
+        if(progressInterval) clearInterval(progressInterval);
+        progressInterval = setInterval(() => {
+            try {
+                const win = routeIframe.contentWindow;
+                if(!win) return;
+                const completed = win.COMPLETED;
+                const total = win.totalSlides;
+                if(typeof completed !== 'undefined' && typeof total !== 'undefined') {
+                    setStoredProgress(currentRouteId, completed);
+                    if(completed >= total && total > 0) {
+                        showFinishScreen();
+                    }
+                }
+            } catch(e) {}
+        }, 800);
+    }
+
+    function formatElapsed(ms) {
+        const sec = Math.max(0, Math.round(ms/1000));
+        const m = Math.floor(sec/60);
+        const s = sec % 60;
+        return `${m}:${s.toString().padStart(2,'0')}`;
+    }
+
+    function showFinishScreen() {
+        if(!currentRoute) return;
+        stopTracking();
+        finishTitle.textContent = currentRoute.name;
+        finishDesc.textContent = currentRoute.desc || 'Поздравляем! Вы успешно прошли маршрут.';
+        const total = currentRoute.totalSlides || 0;
+        statSlides.textContent = total;
+        statTime.textContent = formatElapsed(Date.now() - routeStartTime);
+        if (currentRoute.pic) {
+            const previewUrl = `${ROUTE_BASE}/${encodeURIComponent(currentRouteId)}/assets/${encodeURIComponent(currentRoute.pic)}`;
+            finishPreview.style.backgroundImage = `url('${previewUrl}')`;
+            finishPreview.style.display = 'block';
+        } else {
+            finishPreview.style.display = 'none';
+        }
+        finishOverlay.classList.remove('hidden');
+    }
+
+    function stopTracking() {
+        if(progressInterval) { clearInterval(progressInterval); progressInterval = null; }
+    }
+
+    function backToMenu() {
+        stopTracking();
+        routeIframe.src = 'about:blank';
+        playerView.classList.remove('active');
+        finishOverlay.classList.add('hidden');
+        selectionView.style.display = 'block';
+        renderCards();
+        currentRouteId = null;
+        currentRoute = null;
+    }
+
+    backBtn.addEventListener('click', backToMenu);
+    finishBackBtn.addEventListener('click', backToMenu);
+    finishReplayBtn.addEventListener('click', () => {
+        if (!currentRouteId) return;
+        const id = currentRouteId;
+        setStoredProgress(id, 0);
+        finishOverlay.classList.add('hidden');
+        startRoute(id);
+    });
+    window.addEventListener('keydown', e => { if(e.key==='Escape' && playerView.classList.contains('active')) backToMenu(); });
+    window.addEventListener('DOMContentLoaded', checkSession);
+})();
 </script>
 </body>
 </html>

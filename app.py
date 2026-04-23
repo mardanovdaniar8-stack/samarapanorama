@@ -23,6 +23,19 @@ MASTER_CODE = '676767'  # always-working test code
 
 EMAIL_USER = os.environ.get('EMAIL_USER')
 EMAIL_PASS = os.environ.get('EMAIL_PASS')
+SMTP_HOST = os.environ.get('SMTP_HOST')
+SMTP_PORT = int(os.environ.get('SMTP_PORT', '465'))
+
+
+def _detect_smtp_host(email: str | None) -> str:
+    if SMTP_HOST:
+        return SMTP_HOST
+    domain = (email or '').split('@')[-1].lower()
+    if domain in ('mail.ru', 'inbox.ru', 'list.ru', 'bk.ru', 'internet.ru'):
+        return 'smtp.mail.ru'
+    if domain in ('yandex.ru', 'yandex.com', 'ya.ru'):
+        return 'smtp.yandex.ru'
+    return 'smtp.gmail.com'
 
 
 def generate_code() -> str:
@@ -41,7 +54,9 @@ def send_verification_email(receiver_email: str, code: str) -> bool:
         msg['Subject'] = "Код подтверждения · Культура63"
         msg['From'] = EMAIL_USER
         msg['To'] = receiver_email
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465, timeout=15) as server:
+        host = _detect_smtp_host(EMAIL_USER)
+        logger.info("Sending verification via %s:%s as %s", host, SMTP_PORT, EMAIL_USER)
+        with smtplib.SMTP_SSL(host, SMTP_PORT, timeout=15) as server:
             server.login(EMAIL_USER, EMAIL_PASS)
             server.send_message(msg)
         logger.info("Verification email sent to %s", receiver_email)

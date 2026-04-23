@@ -204,26 +204,36 @@ def login():
 @app.route('/api/auth/logout', methods=['POST'])
 def logout():
     session.pop('user_email', None)
+    session.pop('guest', None)
     return jsonify({'ok': True})
+
+
+@app.route('/api/auth/guest', methods=['POST'])
+def guest_login():
+    session.pop('user_email', None)
+    session['guest'] = True
+    return jsonify({'ok': True, 'user': {'name': 'Гость', 'email': None, 'guest': True}})
 
 
 @app.route('/api/auth/me')
 def me():
     email = session.get('user_email')
-    if not email:
-        return jsonify({'user': None})
-    users = load_users()
-    user = users.get(email)
-    if not user:
-        session.pop('user_email', None)
-        return jsonify({'user': None})
-    return jsonify({'user': {'name': user['name'], 'email': email}})
+    if email:
+        users = load_users()
+        user = users.get(email)
+        if not user:
+            session.pop('user_email', None)
+            return jsonify({'user': None})
+        return jsonify({'user': {'name': user['name'], 'email': email}})
+    if session.get('guest'):
+        return jsonify({'user': {'name': 'Гость', 'email': None, 'guest': True}})
+    return jsonify({'user': None})
 
 
 # ---------- ROUTES ----------
 
 def require_auth():
-    return bool(session.get('user_email'))
+    return bool(session.get('user_email')) or bool(session.get('guest'))
 
 
 @app.route('/api/routes')

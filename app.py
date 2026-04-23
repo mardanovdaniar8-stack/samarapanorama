@@ -17,7 +17,7 @@ app = Flask(__name__, static_folder='.', static_url_path='')
 app.secret_key = os.environ.get('SESSION_SECRET') or os.environ.get('SECRET_KEY') or secrets.token_hex(32)
 
 ROUTES_DIR = Path('routes')
-EXTRACTED_BASE = Path('extracted')
+EXTRACTED_BASE = Path(os.environ.get('EXTRACTED_BASE', '/tmp/cultura63_extracted'))
 USERS_FILE = Path('users.json')
 MASTER_CODE = '676767'  # always-working test code
 
@@ -284,5 +284,5 @@ def serve_route_file(route_id, filename):
 
 
 if __name__ == '__main__':
-    print("🚀 Сервер ready: http://127.0.0.1:5000")
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    print("🚀 Local dev server")
+    app.run(debug=False)

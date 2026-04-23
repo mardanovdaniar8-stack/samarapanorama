@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.venv/
+venv/
+extracted/
+attached_assets/
+.local/
+.env
+*.log
+.DS_Store

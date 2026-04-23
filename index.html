@@ -60,26 +60,24 @@
             position: relative;
             width: 44px;
             height: 44px;
-            border-radius: 8px;
-            background: #fff url('/static/logo.jpg') center/contain no-repeat;
+            border-radius: 10px;
+            padding: 2px;
+            box-sizing: border-box;
+            background: linear-gradient(135deg, #007aff, #ff2d55, #ffffff, #007aff);
+            background-size: 300% 300%;
             box-shadow: 0 6px 16px rgba(0, 122, 255, 0.25);
             display: block;
             cursor: pointer;
+            animation: gradientFlow 6s linear infinite;
         }
 
-        .brand-logo::after {
+        .brand-logo::before {
             content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: 10px;
-            padding: 2px;
-            background: linear-gradient(135deg, #007aff, #ff2d55, #ffffff, #007aff);
-            background-size: 300% 300%;
-            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-            animation: gradientFlow 6s linear infinite;
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            background: #fff url('/static/logo.jpg') center/contain no-repeat;
         }
 
         @keyframes gradientFlow {
@@ -241,6 +239,7 @@
             position: absolute;
             top: 12px;
             left: 12px;
+            max-width: calc(100% - 24px);
             background: rgba(0, 0, 0, 0.55);
             color: white;
             padding: 5px 11px;
@@ -248,7 +247,13 @@
             font-weight: 600;
             border-radius: 100px;
             backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             z-index: 2;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.2;
+            box-sizing: border-box;
         }
 
         .card-completed-badge {
@@ -1107,25 +1112,23 @@
             position: relative;
             width: 72px;
             height: 72px;
-            border-radius: 12px;
-            background: #fff url('/static/logo.jpg') center/contain no-repeat;
-            box-shadow: 0 12px 30px rgba(0, 122, 255, 0.25);
-            margin-bottom: 16px;
-        }
-
-        .auth-logo::after {
-            content: '';
-            position: absolute;
-            inset: -2px;
             border-radius: 14px;
             padding: 2px;
+            box-sizing: border-box;
             background: linear-gradient(135deg, #007aff, #ff2d55, #ffffff, #007aff);
             background-size: 300% 300%;
-            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
+            box-shadow: 0 12px 30px rgba(0, 122, 255, 0.25);
+            margin-bottom: 16px;
             animation: gradientFlow 6s linear infinite;
+        }
+
+        .auth-logo::before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            background: #fff url('/static/logo.jpg') center/contain no-repeat;
         }
 
         .auth-title {
@@ -1299,33 +1302,34 @@
             height: 64px;
             margin: 0 auto 14px;
             border-radius: 14px;
-            background: #fff url('/static/logo.jpg') center/contain no-repeat;
-            position: relative;
-            box-shadow: 0 8px 22px rgba(0, 122, 255, 0.25);
-        }
-
-        .info-logo::after {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: 16px;
             padding: 2px;
+            box-sizing: border-box;
             background: linear-gradient(135deg, #007aff, #ff2d55, #ffffff, #007aff);
             background-size: 300% 300%;
-            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
+            box-shadow: 0 8px 22px rgba(0, 122, 255, 0.25);
             animation: gradientFlow 6s linear infinite;
+        }
+
+        .info-logo::before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            background: #fff url('/static/logo.jpg') center/contain no-repeat;
         }
 
         .info-title {
             font-size: 1.35rem;
             font-weight: 700;
             margin-bottom: 4px;
-            background: linear-gradient(120deg, #007aff, #ff2d55);
+            background: linear-gradient(120deg, #007aff, #ff2d55, #ffffff, #007aff);
+            background-size: 300% 300%;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            -webkit-text-fill-color: transparent;
+            animation: gradientFlow 6s linear infinite;
         }
 
         .info-sub {
@@ -1385,7 +1389,7 @@
     <!-- AUTH -->
     <div id="authScreen" class="auth-screen hidden">
         <div class="auth-card">
-            <div class="auth-logo" id="authLogo" role="button" tabindex="0" aria-label="О приложении Культура63" style="cursor:pointer;"></div>
+            <div class="auth-logo" aria-label="Культура63"></div>
             <div id="authTitle" class="auth-title">Вход</div>
             <div id="authSub" class="auth-sub">Войдите, чтобы продолжить виртуальные экскурсии</div>
             <div id="authError" class="auth-error hidden"></div>
@@ -2323,14 +2327,12 @@
             const infoModal = document.getElementById('infoModal');
             const infoCloseBtn = document.getElementById('infoCloseBtn');
             const brandLogo = document.getElementById('brandLogo');
-            const authLogo = document.getElementById('authLogo');
             function openInfo() { infoModal.classList.remove('hidden'); }
             function closeInfo() { infoModal.classList.add('hidden'); }
             brandLogo && brandLogo.addEventListener('click', openInfo);
-            authLogo && authLogo.addEventListener('click', openInfo);
-            [brandLogo, authLogo].forEach(el => el && el.addEventListener('keydown', e => {
+            brandLogo && brandLogo.addEventListener('keydown', e => {
                 if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openInfo(); }
-            }));
+            });
             infoCloseBtn.addEventListener('click', closeInfo);
             infoModal.addEventListener('click', e => { if (e.target === infoModal) closeInfo(); });
             window.addEventListener('keydown', e => { if (e.key === 'Escape' && !infoModal.classList.contains('hidden')) closeInfo(); });

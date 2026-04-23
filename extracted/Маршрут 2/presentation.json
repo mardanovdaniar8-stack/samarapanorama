@@ -1,0 +1,173 @@
+[
+  {
+    "type": "image",
+    "src": "C:\\Users\\admin\\AppData\\Local\\Temp\\irf_editor_ktxvbdbn\\edit_assets\\tsvetochnyj-holm-Zapovednye-krasoty-Samarskoj-Luki-zhdut-v-otpusk-aktivnyh-i-smelyh.jpg",
+    "messages": [
+      {
+        "title": "Национальный парк «Самарская Лука»",
+        "text": "Уникальный изгиб Волги вокруг Жигулёвских гор. Здесь находятся древние курганы, пещеры, редкие виды растений и животных. Место связано с легендами о Стеньке Разине и волжских разбойниках.",
+        "audio": ""
+      }
+    ],
+    "audio": "",
+    "filename": "tsvetochnyj-holm-Zapovednye-krasoty-Samarskoj-Luki-zhdut-v-otpusk-aktivnyh-i-smelyh.jpg"
+  },
+  {
+    "type": "panorama",
+    "src": "C:\\Users\\admin\\AppData\\Local\\Temp\\irf_editor_ktxvbdbn\\edit_assets\\m2_1.jpg",
+    "messages": [
+      {
+        "title": "",
+        "text": "Это панорама. Осмотритесь.",
+        "audio": ""
+      }
+    ],
+    "audio": "",
+    "filename": "m2_1.jpg"
+  },
+  {
+    "type": "image",
+    "src": "C:\\Users\\admin\\AppData\\Local\\Temp\\irf_editor_ktxvbdbn\\edit_assets\\orig__2_.jpg",
+    "messages": [
+      {
+        "title": "Гора стрельная",
+        "text": "Одна из самых высоких точек Жигулей (375 м). Со смотровой площадки открывается потрясающий вид на Волгу и окрестности. В древности здесь находился сторожевой пост для наблюдения за речными путями.",
+        "audio": ""
+      }
+    ],
+    "audio": "",
+    "filename": "orig__2_.jpg"
+  },
+  {
+    "type": "panorama",
+    "src": "C:\\Users\\admin\\AppData\\Local\\Temp\\irf_editor_ktxvbdbn\\edit_assets\\m2_2.jpg",
+    "messages": [
+      {
+        "title": "",
+        "text": "Это панорама. Осмотритесь.",
+        "audio": ""
+      }
+    ],
+    "audio": "",
+    "filename": "m2_2.jpg"
+  },
+  {
+    "type": "image",
+    "src": "C:\\Users\\admin\\AppData\\Local\\Temp\\irf_editor_ktxvbdbn\\edit_assets\\hIAAAgPB2OA-1920__1_.jpg",
+    "messages": [
+      {
+        "title": "Молодецкий курган",
+        "text": "Живописная гора на берегу Волги. По легенде, здесь останавливался Степан Разин. С вершины открывается вид на Жигулёвское море (Куйбышевское водохранилище). Популярное место для пеших походов и пикников.",
+        "audio": ""
+      }
+    ],
+    "audio": "",
+    "filename": "hIAAAgPB2OA-1920__1_.jpg"
+  },
+  {
+    "type": "panorama",
+    "src": "C:\\Users\\admin\\AppData\\Local\\Temp\\irf_editor_ktxvbdbn\\edit_assets\\m2_3.jpg",
+    "messages": [
+      {
+        "title": "",
+        "text": "Это панорама. Осмотритесь.",
+        "audio": ""
+      }
+    ],
+    "audio": "",
+    "filename": "m2_3.jpg"
+  },
+  {
+    "type": "image",
+    "src": "C:\\Users\\admin\\AppData\\Local\\Temp\\irf_editor_ktxvbdbn\\edit_assets\\0loVeCMXCj9ys1p0i2PsA.jpg",
+    "messages": [
+      {
+        "title": "Замок Гарибальди",
+        "text": "Современный туристический комплекс в стиле неоготики. Хотя замок построен в XXI веке, он выглядит как средневековая крепость. Здесь можно сделать эффектные фото, прогуляться по территории и посетить кафе.",
+        "audio": ""
+      }
+    ],
+    "audio": "",
+    "filename": "0loVeCMXCj9ys1p0i2PsA.jpg"
+  },
+  {
+    "type": "panorama",
+    "src": "C:\\Users\\admin\\AppData\\Local\\Temp\\irf_editor_ktxvbdbn\\edit_assets\\m2_4.jpg",
+    "messages": [
+      {
+        "title": "",
+        "text": "Это панорама. Осмотритесь.",
+        "audio": ""
+      }
+    ],
+    "audio": "",
+    "filename": "m2_4.jpg"
+  },
+  {
+    "type": "quiz",
+    "question": "Как называется уникальный изгиб Волги вокруг Жигулёвских гор?",
+    "options": [
+      {
+        "text": "Самарская Лука",
+        "image": ""
+      },
+      {
+        "text": "Жигулёвская Дуга",
+        "image": ""
+      },
+      {
+        "text": "Волжская Петля",
+        "image": ""
+      }
+    ],
+    "correct": 0,
+    "audio": ""
+  },
+  {
+    "type": "quiz",
+    "question": "Какая гора в Жигулях предлагает лучший вид на Волгу?",
+    "options": [
+      {
+        "text": "Гора Тип‑Тяв",
+        "image": ""
+      },
+      {
+        "text": "Гора Стрельная",
+        "image": ""
+      },
+      {
+        "text": "Гора Верблюд",
+        "image": ""
+      }
+    ],
+    "correct": 1,
+    "audio": ""
+  },
+  {
+    "type": "quiz",
+    "question": "С каким историческим персонажем связана легенда Молодёцкого кургана?",
+    "options": [
+      {
+        "text": "Емельян Пугачёв",
+        "image": ""
+      },
+      {
+        "text": "Степан Разин",
+        "image": ""
+      },
+      {
+        "text": "Ермак Тимофеевич",
+        "image": ""
+      }
+    ],
+    "correct": 1,
+    "audio": ""
+  },
+  {
+    "type": "image",
+    "src": "C:/Users/admin/Pictures/Screenshots/Снимок экрана 2026-04-23 171448.png",
+    "messages": [],
+    "audio": "",
+    "filename": "Snimok_ekrana_2026-04-23_171448.png"
+  }
+]

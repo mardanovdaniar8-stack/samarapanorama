@@ -1,14 +1,8 @@
 {
-  "mardanovdaniar8@gmail.com": {
-    "name": "Sigma",
-    "email": "mardanovdaniar8@gmail.com",
-    "password": "d88324eb27443217c22c49dd8de35eea1a295713134755e4204503d3d6b7c8a5",
-    "verified": true
-  },
-  "mardanov@gmail.com": {
-    "name": "5",
-    "email": "mardanov@gmail.com",
-    "password": "d88324eb27443217c22c49dd8de35eea1a295713134755e4204503d3d6b7c8a5",
+  "t@t.com": {
+    "name": "Test",
+    "email": "t@t.com",
+    "password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
     "verified": true
   }
 }

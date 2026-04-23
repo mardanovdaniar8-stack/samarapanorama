@@ -690,6 +690,7 @@
     let routesData = [];
     let currentRouteId = null;
     let currentRoute = null;
+    let currentSlides = null;
     let progressInterval = null;
     let currentUser = null;
 
@@ -944,11 +945,17 @@
         selectionView.style.display = 'none';
         playerView.classList.add('active');
         finishOverlay.classList.add('hidden');
+        currentSlides = null;
+        fetch(`${API_BASE}/route/${encodeURIComponent(routeId)}/slides`, {credentials:'same-origin'})
+            .then(r => r.ok ? r.json() : {slides:[]})
+            .then(d => { currentSlides = d.slides || []; applySlideFixes(); })
+            .catch(() => { currentSlides = []; });
         routeIframe.src = `${ROUTE_BASE}/${encodeURIComponent(routeId)}/index.html`;
         showLoader(true);
         routeIframe.onload = () => {
             showLoader(false);
             injectCounterStyle();
+            applySlideFixes();
             startProgressTracking();
         };
         routeIframe.onerror = () => { showLoader(false); alert('Ошибка загрузки маршрута'); };
@@ -969,8 +976,84 @@
                     color: white !important;
                     z-index: 150 !important;
                 }
+                .textbox-container {
+                    display: flex !important;
+                    visibility: visible !important;
+                    opacity: 1 !important;
+                    z-index: 50 !important;
+                    position: absolute !important;
+                    left: 0 !important;
+                    right: 0 !important;
+                    bottom: 0 !important;
+                    height: 28vh !important;
+                    background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0) 100%) !important;
+                    align-items: flex-end !important;
+                    padding: 0 40px 28px 40px !important;
+                    box-sizing: border-box !important;
+                    pointer-events: auto !important;
+                }
+                .textbox { color: #fff !important; width: 100%; }
+                .textbox-title {
+                    color: #fff !important;
+                    font-size: clamp(20px, 2.4vw, 32px) !important;
+                    font-weight: 700 !important;
+                    margin-bottom: 8px !important;
+                    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+                }
+                .textbox-text {
+                    color: #fff !important;
+                    font-size: clamp(14px, 1.4vw, 18px) !important;
+                    line-height: 1.5 !important;
+                    text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+                    white-space: pre-wrap;
+                }
+                .textbox-nav { z-index: 51 !important; }
+                .reveal .pannellum-container,
+                .reveal [id^="pano_"] {
+                    width: 100% !important;
+                    height: 100% !important;
+                    position: absolute !important;
+                    top: 0 !important;
+                    left: 0 !important;
+                }
             `;
             doc.head.appendChild(style);
+
+            // Hook reveal slidechange to fix panoramas + re-render messages
+            const win = routeIframe.contentWindow;
+            const wireReveal = () => {
+                if (!win || !win.Reveal || !win.Reveal.on) { setTimeout(wireReveal, 200); return; }
+                const onChange = () => {
+                    try { win.dispatchEvent(new Event('resize')); } catch(e) {}
+                    applySlideFixes();
+                };
+                win.Reveal.on('slidechanged', onChange);
+                win.Reveal.on('ready', onChange);
+                onChange();
+            };
+            wireReveal();
+        } catch(e) {}
+    }
+
+    function applySlideFixes() {
+        if (!currentSlides || !routeIframe.contentDocument) return;
+        try {
+            const doc = routeIframe.contentDocument;
+            currentSlides.forEach((slide, idx) => {
+                const msgs = slide.messages || [];
+                if (!msgs.length) return;
+                const titleEl = doc.getElementById('textbox-title-' + idx);
+                const textEl = doc.getElementById('textbox-text-' + idx);
+                const cont = doc.getElementById('textbox-container-' + idx);
+                if (!titleEl || !textEl) return;
+                const m = msgs[0];
+                if (!titleEl.textContent.trim() || titleEl.dataset.injected !== '1') {
+                    titleEl.textContent = m.title || '';
+                    textEl.textContent = m.text || '';
+                    titleEl.dataset.injected = '1';
+                }
+                if (cont) cont.style.display = 'flex';
+            });
         } catch(e) {}
     }
 
@@ -981,7 +1064,9 @@
                 const win = routeIframe.contentWindow;
                 if(!win) return;
                 const completed = win.COMPLETED;
-                const total = win.totalSlides;
+                const total = (currentSlides && currentSlides.length)
+                    || (currentRoute && currentRoute.totalSlides)
+                    || win.totalSlides;
                 if(typeof completed !== 'undefined' && typeof total !== 'undefined') {
                     setStoredProgress(currentRouteId, completed);
                     if(completed >= total && total > 0) {

@@ -174,6 +174,30 @@ def api_routes():
     return jsonify({'routes': scan_routes()})
 
 
+@app.route('/api/route/<route_id>/slides')
+def api_route_slides(route_id):
+    if not require_auth():
+        return jsonify({'error': 'Требуется авторизация'}), 401
+    irf_path = ROUTES_DIR / f"{route_id}.irf"
+    if not irf_path.exists():
+        return jsonify({'error': 'not found'}), 404
+    dest_dir = extract_irf(irf_path, route_id)
+    pres = dest_dir / 'presentation.json'
+    if not pres.exists():
+        return jsonify({'slides': []})
+    try:
+        data = json.loads(pres.read_text(encoding='utf-8'))
+    except Exception:
+        return jsonify({'slides': []})
+    slides = []
+    for s in data:
+        slides.append({
+            'type': s.get('type', ''),
+            'messages': s.get('messages', []) or [],
+        })
+    return jsonify({'slides': slides})
+
+
 @app.route('/route/<route_id>/<path:filename>')
 def serve_route_file(route_id, filename):
     if not require_auth():

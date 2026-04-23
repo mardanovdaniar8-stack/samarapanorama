@@ -4,5 +4,11 @@
     "email": "t@t.com",
     "password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
     "verified": true
+  },
+  "s@mai.ru": {
+    "name": "ыв",
+    "email": "s@mai.ru",
+    "password": "d7ef0a04f3c8055644677299a9414a75adcb15916eb48417416c9317ace2ff4f",
+    "verified": true
   }
 }

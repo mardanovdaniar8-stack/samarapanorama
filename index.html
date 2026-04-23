@@ -976,6 +976,62 @@
                     color: white !important;
                     z-index: 150 !important;
                 }
+                html, body, .reveal, .reveal .slides {
+                    width: 100% !important;
+                    height: 100% !important;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                    overflow: hidden !important;
+                }
+                .reveal .slides {
+                    top: 0 !important;
+                    left: 0 !important;
+                    transform: none !important;
+                    text-align: left !important;
+                }
+                .reveal .slides > section,
+                .reveal .slides > section.stack {
+                    position: absolute !important;
+                    top: 0 !important;
+                    left: 0 !important;
+                    right: 0 !important;
+                    bottom: 0 !important;
+                    width: 100% !important;
+                    height: 100% !important;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                    transform: none !important;
+                    -webkit-transform: none !important;
+                }
+                .reveal .slides > section:not(.present) { display: none !important; }
+                .reveal .slides > section.present { display: block !important; }
+                .quiz-container {
+                    position: relative !important;
+                    z-index: 20 !important;
+                    width: 90% !important;
+                    max-width: 800px !important;
+                    margin: 5vh auto !important;
+                    background: rgba(20,20,30,0.85) !important;
+                    color: #fff !important;
+                    padding: 32px !important;
+                    border-radius: 16px !important;
+                    box-shadow: 0 20px 60px rgba(0,0,0,0.5) !important;
+                }
+                .quiz-container * { color: #fff !important; }
+                .quiz-container button {
+                    display: block;
+                    width: 100%;
+                    margin: 8px 0;
+                    padding: 12px 16px;
+                    background: rgba(255,255,255,0.1) !important;
+                    border: 1px solid rgba(255,255,255,0.25) !important;
+                    border-radius: 10px;
+                    color: #fff !important;
+                    cursor: pointer;
+                    font-size: 16px;
+                    text-align: left;
+                }
+                .quiz-container button:hover { background: rgba(255,255,255,0.2) !important; }
                 .textbox-container {
                     display: flex !important;
                     visibility: visible !important;

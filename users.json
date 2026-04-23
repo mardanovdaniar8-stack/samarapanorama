@@ -10,5 +10,11 @@
     "email": "s@mai.ru",
     "password": "d7ef0a04f3c8055644677299a9414a75adcb15916eb48417416c9317ace2ff4f",
     "verified": true
+  },
+  "d@d.d": {
+    "name": "d",
+    "email": "d@d.d",
+    "password": "bfc7602368c3bd1f6fde72b04e213811df9e0ace6f77d0640aa60878b1c168da",
+    "verified": true
   }
 }

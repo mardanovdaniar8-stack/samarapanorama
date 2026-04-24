@@ -55,11 +55,11 @@ def send_verification_email(receiver_email: str, code: str) -> bool:
         msg['From'] = EMAIL_USER
         msg['To'] = receiver_email
         host = _detect_smtp_host(EMAIL_USER)
-        logger.info("Sending verification via %s:%s as %s", host, SMTP_PORT, EMAIL_USER)
+        logger.info("Sending verification via %s:%s", host, SMTP_PORT)
         with smtplib.SMTP_SSL(host, SMTP_PORT, timeout=15) as server:
             server.login(EMAIL_USER, EMAIL_PASS)
             server.send_message(msg)
-        logger.info("Verification email sent to %s", receiver_email)
+        logger.info("Verification email sent")
         return True
     except Exception as e:
         logger.exception("Failed to send verification email: %s", e)

@@ -265,9 +265,10 @@
         }
 
         .route-card:hover .card-duration-badge {
-            background: linear-gradient(135deg, rgba(0, 122, 255, 0.95), rgba(255, 45, 85, 0.95));
-            border-color: rgba(255, 255, 255, 0.35);
-            box-shadow: 0 6px 18px rgba(0, 122, 255, 0.35), 0 0 0 3px rgba(255, 255, 255, 0.18);
+            background: #ffffff;
+            color: #1d1d1f;
+            border-color: #1d1d1f;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
         }
 
         .card-completed-badge {
@@ -961,15 +962,53 @@
             line-height: 1.45;
         }
 
-        @media (max-width: 900px) and (orientation: portrait) {
-            .player-view.active .rotate-overlay {
-                display: flex;
+        @media (max-width: 900px) {
+            .player-header {
+                top: 10px;
+                left: 10px;
             }
 
-            .player-view.active .player-frame,
-            .player-view.active .player-header,
-            .player-view.active .finish-overlay {
-                display: none !important;
+            .back-btn {
+                padding: 8px 14px;
+                font-size: 0.85rem;
+                border-radius: 30px;
+            }
+
+            .back-btn span {
+                display: none;
+            }
+
+            .finish-card {
+                padding: 16px 16px 14px;
+                border-radius: 20px;
+                max-height: calc(100dvh - 32px);
+                overflow-y: auto;
+            }
+
+            .finish-trophy {
+                width: 72px;
+                height: 72px;
+                font-size: 2.4rem;
+                margin-bottom: 10px;
+            }
+
+            .finish-title {
+                font-size: 1.25rem;
+            }
+
+            .finish-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .finish-actions button {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 900px) and (orientation: portrait) {
+            .player-view.active .rotate-overlay {
+                display: none;
             }
         }
 
@@ -1482,7 +1521,7 @@
 
     <div id="playerView" class="player-view">
         <div class="player-header">
-            <button class="back-btn" id="backToMenuBtn">← Вернуться в меню</button>
+            <button class="back-btn" id="backToMenuBtn">←<span> Вернуться в меню</span></button>
         </div>
         <iframe id="routeIframe" class="player-frame" allow="fullscreen"
             sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals"></iframe>

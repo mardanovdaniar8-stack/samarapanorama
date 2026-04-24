@@ -1,3 +1,4 @@
+import io
 import os
 import json
 import zipfile
@@ -86,19 +87,30 @@ def hash_password(password: str) -> str:
     return hashlib.sha256(password.encode('utf-8')).hexdigest()
 
 
+_ROUTE_OBFUSCATION_KEY = 0xA5
+
+
+def _open_route_archive(path: Path) -> zipfile.ZipFile:
+    """Open a route archive (obfuscated .dat or plain .irf) as a ZipFile."""
+    raw = path.read_bytes()
+    if path.suffix.lower() == '.dat':
+        raw = bytes(b ^ _ROUTE_OBFUSCATION_KEY for b in raw)
+    return zipfile.ZipFile(io.BytesIO(raw), 'r')
+
+
 def extract_irf(irf_path: Path, route_id: str) -> Path:
     dest = EXTRACTED_BASE / route_id
     if dest.exists():
         return dest
     dest.mkdir(parents=True)
-    with zipfile.ZipFile(irf_path, 'r') as zf:
+    with _open_route_archive(irf_path) as zf:
         zf.extractall(dest)
     return dest
 
 
 def get_route_info(irf_path: Path):
     route_id = irf_path.stem
-    with zipfile.ZipFile(irf_path, 'r') as zf:
+    with _open_route_archive(irf_path) as zf:
         metadata = {}
         if 'metadata.json' in zf.namelist():
             with zf.open('metadata.json') as f:
@@ -119,13 +131,26 @@ def get_route_info(irf_path: Path):
         }
 
 
+def _find_route_file(route_id: str) -> Path | None:
+    for ext in ('.dat', '.irf'):
+        p = ROUTES_DIR / f"{route_id}{ext}"
+        if p.exists():
+            return p
+    return None
+
+
 def scan_routes():
     routes = []
-    for irf_file in ROUTES_DIR.glob('*.irf'):
+    seen_ids = set()
+    files = list(ROUTES_DIR.glob('*.dat')) + list(ROUTES_DIR.glob('*.irf'))
+    for route_file in files:
+        if route_file.stem in seen_ids:
+            continue
+        seen_ids.add(route_file.stem)
         try:
-            routes.append(get_route_info(irf_file))
+            routes.append(get_route_info(route_file))
         except Exception as e:
-            print(f"Ошибка чтения {irf_file}: {e}")
+            print(f"Ошибка чтения {route_file}: {e}")
     return routes
 
 
@@ -247,8 +272,8 @@ def api_routes():
 def api_route_slides(route_id):
     if not require_auth():
         return jsonify({'error': 'Требуется авторизация'}), 401
-    irf_path = ROUTES_DIR / f"{route_id}.irf"
-    if not irf_path.exists():
+    irf_path = _find_route_file(route_id)
+    if irf_path is None:
         return jsonify({'error': 'not found'}), 404
     dest_dir = extract_irf(irf_path, route_id)
     pres = dest_dir / 'presentation.json'
@@ -271,8 +296,8 @@ def api_route_slides(route_id):
 def serve_route_file(route_id, filename):
     if not require_auth():
         abort(401)
-    irf_path = ROUTES_DIR / f"{route_id}.irf"
-    if not irf_path.exists():
+    irf_path = _find_route_file(route_id)
+    if irf_path is None:
         abort(404, description="IRF файл не найден")
     dest_dir = extract_irf(irf_path, route_id)
     safe_path = (dest_dir / filename).resolve()

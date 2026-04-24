@@ -18,7 +18,7 @@ app.secret_key = os.environ.get('SESSION_SECRET') or os.environ.get('SECRET_KEY'
 
 ROUTES_DIR = Path('routes')
 EXTRACTED_BASE = Path(os.environ.get('EXTRACTED_BASE', '/tmp/cultura63_extracted'))
-USERS_FILE = Path('users.json')
+USERS_FILE = Path(os.environ.get('USERS_FILE', '/tmp/cultura63_users.json'))
 MASTER_CODE = '676767'  # always-working test code
 
 EMAIL_USER = os.environ.get('EMAIL_USER')
